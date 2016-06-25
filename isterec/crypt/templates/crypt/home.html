@@ -1,0 +1,85 @@
+{%extends "webapp/header.html" %}
+
+{% block content %}
+
+{% load static from staticfiles %}
+
+
+<!-- IMPORTANT enctype attribute! -->
+
+<h1>Details</h1>
+		
+		<form class="form-horizontal" action="" method="POST" {% if form.is_multipart %}enctype="multipart/form-data"{% endif %}>
+    {% csrf_token %}
+    {{ form.media }}
+    {% if form.errors %}
+        <div class="alert alert-error">
+            <ul>
+                {% for error in form.non_field_errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+    {% for field in form.visible_fields %}
+        <div class="control-group {{ field.html_name }} {% if field.errors %}error{% endif %}">
+            <label class="control-label">{{ field.label }}{% if field.field.required %} *{% endif %}</label>
+            <div class="controls">
+                {{ field }}
+                {% if field.errors %}<span class="help-inline">{{ field.errors.as_text }}</span>{% endif %}
+            </div>
+        </div>
+    {% endfor %}
+    {% for field in form.hidden_fields %}
+        {{ field }}
+    {% endfor %}
+
+    {% block formsets %}
+        {% for formset in inlines %}
+            {% include "inline_formset.html" with formset=formset %}
+        {% endfor %}        
+    {% endblock formsets %}
+
+    <div class="form-actions">
+        <input class="btn btn-primary btn-large" type="submit" value="Submit"/>
+        {% block extra_buttons %}
+        {% endblock extra_buttons %}
+    </div>
+</form>
+	
+	<h1>Upload your resume</h1>
+        <form class="dropzone" action="{% url "crypt:home" %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+		
+		<button id="submit-all" class="btn btn-primary btn-large">
+            Submit all files
+        </button>
+		
+		</form>
+		<script src="{% static 'crypt/js/dropzone.js' %}"></script>
+        <script type="text/javascript">
+            Dropzone.options.myDropzone = {
+ 
+                // Prevents Dropzone from uploading dropped files immediately
+                autoProcessQueue : false,
+ 
+                init : function() {
+                    var submitButton = document.querySelector("#submit-all")
+                    myDropzone = this;
+ 
+                    submitButton.addEventListener("click", function() {
+                        myDropzone.processQueue();
+                        // Tell Dropzone to process all queued files.
+                    });
+ 
+                    // You might want to show the submit button only when
+                    // files are dropped here:
+                    this.on("addedfile", function() {
+                        // Show submit button here and/or inform user to click it.
+                    });
+ 
+                }
+            };
+        </script>
+		
+{% endblock %}
