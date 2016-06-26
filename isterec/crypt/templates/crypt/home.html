@@ -9,9 +9,9 @@
 
 <h1>Details</h1>
 		
-		<form class="form-horizontal" action="" method="POST" {% if form.is_multipart %}enctype="multipart/form-data"{% endif %}>
-    {% csrf_token %}
-    {{ form.media }}
+        <form class="form-horizontal" action="{% url "crypt:home" %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+			{{ form.media }}
     {% if form.errors %}
         <div class="alert alert-error">
             <ul>
@@ -41,45 +41,68 @@
     {% endblock formsets %}
 
     <div class="form-actions">
-        <input class="btn btn-primary btn-large" type="submit" value="Submit"/>
+        <button id="submit" class="btn btn-primary btn-large">
+            Submit
+		</button>
         {% block extra_buttons %}
         {% endblock extra_buttons %}
     </div>
-</form>
 	
-	<h2>Upload your resume</h2><p>(Fill the form first)</p>
-        <form class="dropzone" action="{% url "crypt:home" %}" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
+	<div class="dropzone" id="my-dropzone" name="mainFileUploader">
+            <div class="fallback">
+                <input name="file" type="file" multiple />
+            </div>
+    </div>
 		
-		<button id="submit-all" class="btn btn-primary btn-large">
+	</form>
+	
+	<button id="submit-all" class="btn btn-primary btn-large">
             Submit all files
-        </button>
+    </button>
 		
-		</form>
 		<script src="{% static 'crypt/js/dropzone.js' %}"></script>
-        <script type="text/javascript">
-            Dropzone.options.myDropzone = {
- 
-                // Prevents Dropzone from uploading dropped files immediately
-                autoProcessQueue : false,
- 
-                init : function() {
-                    var submitButton = document.querySelector("#submit-all")
-                    myDropzone = this;
- 
-                    submitButton.addEventListener("click", function() {
-                        myDropzone.processQueue();
-                        // Tell Dropzone to process all queued files.
+        <script>
+        Dropzone.options.myDropzone = {
+            url: "/crypt",
+            autoProcessQueue: false,
+            uploadMultiple: true,
+            parallelUploads: 100,
+            maxFiles: 100,
+            acceptedFiles: "image/*",
+
+            init: function () {
+
+                var submitButton = document.querySelector("#submit");
+                var wrapperThis = this;
+
+                submitButton.addEventListener("click", function () {
+                    wrapperThis.processQueue();
+                });
+
+                this.on("addedfile", function (file) {
+
+                    // Create the remove button
+                    var removeButton = Dropzone.createElement("<button class='btn btn-lg dark'>Remove File</button>");
+
+                    // Listen to the click event
+                    removeButton.addEventListener("click", function (e) {
+                        // Make sure the button click doesn't submit the form:
+                        e.preventDefault();
+                        e.stopPropagation();
+
+                        // Remove the file preview.
+                        wrapperThis.removeFile(file);
+                        // If you want to the delete the file on the server as well,
+                        // you can do the AJAX request here.
                     });
- 
-                    // You might want to show the submit button only when
-                    // files are dropped here:
-                    this.on("addedfile", function() {
-                        // Show submit button here and/or inform user to click it.
-                    });
- 
-                }
-            };
-        </script>
+
+                    // Add the button to the file preview element.
+                    file.previewElement.appendChild(removeButton);
+                });
+
+               
+            }
+        };
+    </script>
 		
 {% endblock %}

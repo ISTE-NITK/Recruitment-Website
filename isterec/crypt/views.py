@@ -6,7 +6,6 @@ from django.shortcuts import render_to_response
  
 from crypt.forms import UploadFileForm
 from crypt.models import UploadFile
-from django.utils.timezone import datetime
 
 def index(request):
         return render(request, 'crypt/home.html')
@@ -15,7 +14,7 @@ def home(request):
         if request.method == 'POST':
                 form = UploadFileForm(request.POST, request.FILES)
                 if form.is_valid():
-                        new_record = UploadFile(name=request.POST['name'],rollno=request.POST['rollno'],email=request.POST['email'],mobileno=request.POST['mobileno'],body=request.POST['body'],date=datetime.now(), file= request.FILES['file'])
+                        new_record = UploadFile(name=form.cleaned_data['name'],rollno=form.cleaned_data['rollno'],email=form.cleaned_data['email'],mobileno=form.cleaned_data['mobileno'],body=form.cleaned_data['body'], file= request.FILES['file'])
                         new_record.save()
                         return HttpResponseRedirect(reverse('crypt:home'))
         else:
