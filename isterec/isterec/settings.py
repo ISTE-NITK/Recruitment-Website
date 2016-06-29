@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
-
+SESSION_COOKIE_AGE = 300
 INSTALLED_APPS = [
 	'webapp',
     'blog',

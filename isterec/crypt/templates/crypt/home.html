@@ -9,9 +9,10 @@
 
 <h1>Details</h1>
 		
-        <form class="form-horizontal" action="{% url "crypt:home" %}" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-			{{ form.media }}
+		
+        <form class="form-horizontal" action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.media }}
     {% if form.errors %}
         <div class="alert alert-error">
             <ul>
@@ -41,68 +42,10 @@
     {% endblock formsets %}
 
     <div class="form-actions">
-        <button id="submit" class="btn btn-primary btn-large">
-            Submit
-		</button>
+        <input class="btn btn-primary btn-large" type="submit" value="Submit"/>
         {% block extra_buttons %}
         {% endblock extra_buttons %}
     </div>
-	
-	<div class="dropzone" id="my-dropzone" name="mainFileUploader">
-            <div class="fallback">
-                <input name="file" type="file" multiple />
-            </div>
-    </div>
-		
-	</form>
-	
-	<button id="submit-all" class="btn btn-primary btn-large">
-            Submit all files
-    </button>
-		
-		<script src="{% static 'crypt/js/dropzone.js' %}"></script>
-        <script>
-        Dropzone.options.myDropzone = {
-            url: "/crypt",
-            autoProcessQueue: false,
-            uploadMultiple: true,
-            parallelUploads: 100,
-            maxFiles: 100,
-            acceptedFiles: "image/*",
-
-            init: function () {
-
-                var submitButton = document.querySelector("#submit");
-                var wrapperThis = this;
-
-                submitButton.addEventListener("click", function () {
-                    wrapperThis.processQueue();
-                });
-
-                this.on("addedfile", function (file) {
-
-                    // Create the remove button
-                    var removeButton = Dropzone.createElement("<button class='btn btn-lg dark'>Remove File</button>");
-
-                    // Listen to the click event
-                    removeButton.addEventListener("click", function (e) {
-                        // Make sure the button click doesn't submit the form:
-                        e.preventDefault();
-                        e.stopPropagation();
-
-                        // Remove the file preview.
-                        wrapperThis.removeFile(file);
-                        // If you want to the delete the file on the server as well,
-                        // you can do the AJAX request here.
-                    });
-
-                    // Add the button to the file preview element.
-                    file.previewElement.appendChild(removeButton);
-                });
-
-               
-            }
-        };
-    </script>
+</form>
 		
 {% endblock %}

@@ -1,0 +1,96 @@
+{%extends "webapp/header.html" %}
+
+{% block content %}
+
+{% load static from staticfiles %}
+
+
+<!-- IMPORTANT enctype attribute! -->
+
+<h1>Details</h1>
+
+<h2>Upload your resume</h2>
+
+		
+		<form class="dropzone" id="my-awesome-dropzone" name="dropzone" action="{% url "crypt:upload" %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+			
+    {% if form.errors %}
+        <div class="alert alert-error">
+            <ul>
+                {% for error in form.non_field_errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+	
+	
+        </form>
+		
+        <button class="btn btn-primary btn-large" id="upload" type="button">
+            Upload all files
+        </button>
+		
+		<button class="btn btn-primary btn-large" id="submit" type="button"  onclick="document.dropzone.submit()">
+            Submit
+        </button>
+
+		<script src="{% static 'crypt/js/dropzone.js' %}"></script>
+        <script>
+            Dropzone.options.myAwesomeDropzone = {
+ 
+                // Prevents Dropzone from uploading dropped files immediately
+				  maxFiles: 10,
+				  maxFilesize: 100, //mb
+				  addRemoveLinks: true,
+				  autoProcessQueue: false,// used for stopping auto processing upload
+				  uploadMultiple: true,
+				  parallelUploads: 10,
+ 
+				
+                init : function() {
+                    
+                   var myDropzone = this;
+ 
+					var uploadButton = document.querySelector("#upload");
+					var submitButton = document.querySelector("#submit");
+					//submitButton.disabled = true;
+                    myDropzone = this; // closure
+
+                uploadButton.addEventListener("click", function() {
+                  myDropzone.processQueue(); // Tell Dropzone to process all queued files.
+				  
+                });
+				
+				var totalFiles = 0;
+			
+        
+		this.on("success", function(file) {
+			totalFiles += 1;
+			if (this.getAcceptedFiles().length === totalFiles) {	
+				  submitButton.disabled = false;
+				  uploadButton.disabled = true;
+				}
+			});
+		
+				 this.on("queuecomplete", function (file) {
+				 
+				  if (this.getAcceptedFiles().length !== totalFiles) {	
+				  this.removeAllFiles();
+				}
+				
+					});
+
+                 
+                    // You might want to show the submit button only when
+                    // files are dropped here:
+                    
+ 
+                }
+            };
+        </script>
+	
+	
+		
+{% endblock %}

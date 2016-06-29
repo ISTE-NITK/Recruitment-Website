@@ -1,6 +1,17 @@
 from django.contrib import admin
-from crypt.models import UploadFile
-from django.utils.timezone import datetime
+from crypt.models import CryptRecData
+from crypt.models import File
 
+class FileInline(admin.StackedInline):
+    model = File
 
-admin.site.register(UploadFile)
+    
+class CryptRecDataAdmin(admin.ModelAdmin):
+    list_display = ('name', 'rollno','mobileno','email', 'body')
+    inlines = [FileInline]
+
+class FileAdmin(admin.ModelAdmin):
+    list_display = ('file',)
+	
+admin.site.register(CryptRecData,CryptRecDataAdmin)
+admin.site.register(File, FileAdmin)
