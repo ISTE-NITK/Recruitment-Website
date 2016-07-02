@@ -16,8 +16,7 @@ def home(request):
         if request.method == 'POST':
                 form = CryptForm(request.POST)
                 if form.is_valid():
-                        request.session['_info_post'] = request.POST
-                        request.session['_info_post_check'] = 'notnone:p'
+                        request.session['_crypt_info_post'] = request.POST
                         request.session.set_expiry(request.session.get_expiry_age())
                         return HttpResponseRedirect('/crypt/upload')
         else:
@@ -29,19 +28,19 @@ def home(request):
 def upload(request):
         if request.session.get('_crypt_info_success') is not None:
                 return HttpResponseRedirect('/crypt/success')
-        elif request.session.get('_info_post_check') is None:
+        elif request.session.get('_crypt_info_post') is None:
                 return HttpResponseRedirect('/crypt/success')
         else:
                 if request.method == 'POST':
                         if request.FILES == None:
                                 raise Http404("No files uploaded")
-                        old_post = request.session.get('_info_post')
+                        old_post = request.session.get('_crypt_info_post')
                         form_new = CryptRecData(name=old_post['name'], rollno=old_post['rollno'], email=old_post['email'], mobileno=old_post['mobileno'], body=old_post['body'])
                         form_new.save()
                         for newfile in request.FILES:
                                 addfile = File(file = request.FILES[newfile], creator=form_new)
                                 addfile.save()
-                        request.session['_crypt_info_success'] = 'something'
+                        request.session['_crypt_info_success'] = 'success'
                         return HttpResponseRedirect('/')
                 else:
                         form = CryptFileForm()
@@ -54,7 +53,7 @@ def success(request):
         if request.session.get('_crypt_info_success') is None:
                 raise Http404("User session expired/Fill form first")
         else:
-                del request.session['_info_post']
-                del request.session['_info_post_check']
+                del request.session['_crypt_info_post']
+                del request.session['_crypt_info_post_check']
                 del request.session['_crypt_info_success']
                 return render(request, 'crypt/success.html')

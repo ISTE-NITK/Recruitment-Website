@@ -23,13 +23,15 @@
         </div>
     {% endif %}
     {% for field in form.visible_fields %}
+		{% if field.field.page == 2 and field.auto_id == 'id_extra_field_4' %} <h3>Answer <strong>{% if form.errors %}<font color = "red">{% endif %}any two{% if form.errors %}</font>{% endif %}</strong> of the following questions you think you can <strong>{% if form.errors %}<font color = "red">{% endif %}answer the best{% if form.errors %}</font>{% endif %}</strong> :</h3><br>{% endif %}
         <div class="control-group {{ field.html_name }} {% if field.errors %}error{% endif %}">
-            <label class="control-label">{{ field.label }}{% if field.field.required %} *{% endif %}</label>
+            <strong>{{ field.label|linebreaks }}</strong>{% if field.field.required %} *{% endif %}
             <div class="controls">
                 {{ field }}
-                {% if field.errors %}<span class="help-inline">{{ field.errors.as_text }}</span>{% endif %}
+                {% if field.errors %}<span class="help-inline" > <font color = "red">{{ field.errors.as_text }}</font></span>{% endif %}
             </div>
         </div>
+		<br><br>
     {% endfor %}
     {% for field in form.hidden_fields %}
         {{ field }}

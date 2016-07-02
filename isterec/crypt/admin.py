@@ -7,7 +7,7 @@ class FileInline(admin.StackedInline):
 
     
 class CryptRecDataAdmin(admin.ModelAdmin):
-    list_display = ('name', 'rollno','mobileno','email', 'body')
+    list_display = ('name', 'rollno','mobileno','email')
     inlines = [FileInline]
 
 class FileAdmin(admin.ModelAdmin):

@@ -7,7 +7,7 @@
 
 <!-- IMPORTANT enctype attribute! -->
 
-<h1>Details</h1>
+<h1>ISTE Charge Recruitment Form</h1>
 		
 		
         <form class="form-horizontal" action="" method="POST" enctype="multipart/form-data">
@@ -27,7 +27,7 @@
             <label class="control-label">{{ field.label }}{% if field.field.required %} *{% endif %}</label>
             <div class="controls">
                 {{ field }}
-                {% if field.errors %}<span class="help-inline">{{ field.errors.as_text }}</span>{% endif %}
+                {% if field.errors %}<span class="help-inline"><font color = "red">{{ field.errors.as_text }}</font></span>{% endif %}
             </div>
         </div>
     {% endfor %}
@@ -40,7 +40,7 @@
             {% include "inline_formset.html" with formset=formset %}
         {% endfor %}        
     {% endblock formsets %}
-
+	<br>
     <div class="form-actions">
         <input class="btn btn-primary btn-large" type="submit" value="Submit"/>
         {% block extra_buttons %}
