@@ -12,7 +12,7 @@
 <h2>Upload your resume</h2>
 
 		
-		<form class="dropzone" id="my-awesome-dropzone" name="dropzone" action="{% url "crypt:upload" %}" method="post" enctype="multipart/form-data">
+		<form class="dropzone" id="my-awesome-dropzone" name="dropzone" action="{% url "clutch:upload" %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
 			
     {% if form.errors %}
@@ -36,7 +36,7 @@
             Submit
         </button>
 
-		<script src="{% static 'crypt/js/dropzone.js' %}"></script>
+		<script src="{% static 'clutch/js/dropzone.js' %}"></script>
         <script>
             Dropzone.options.myAwesomeDropzone = {
  

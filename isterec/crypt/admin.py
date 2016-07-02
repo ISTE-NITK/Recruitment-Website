@@ -4,6 +4,7 @@ from crypt.models import File
 
 class FileInline(admin.StackedInline):
     model = File
+    extra = 0
     
 class CryptRecDataAdmin(admin.ModelAdmin):
     list_display = ('name', 'rollno','mobileno','email')

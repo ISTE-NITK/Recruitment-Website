@@ -5,9 +5,11 @@ from clutch.models import Answer
 
 class AnswerInline(admin.StackedInline):
     model = Answer
+    extra = 0
 
 class FileInline(admin.StackedInline):
     model = File
+    extra = 0
     
 class ClutchRecDataAdmin(admin.ModelAdmin):
     list_display = ('name', 'rollno','mobileno','email')
@@ -18,6 +20,7 @@ class FileAdmin(admin.ModelAdmin):
 	
 	
 admin.site.register(ClutchRecData,ClutchRecDataAdmin)
+admin.site.register(File, FileAdmin)
 admin.site.register(Question)
 admin.site.register(Answer)
 # Register your models here.

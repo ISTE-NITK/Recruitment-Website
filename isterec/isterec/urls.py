@@ -21,7 +21,7 @@ urlpatterns = [
 	url(r'^', include('webapp.urls')),
 	url(r'^crypt/', include('crypt.urls', namespace="crypt", app_name="crypt")),
 	url(r'^charge/', include('charge.urls')),
-	url(r'^clutch/', include('clutch.urls')),
+	url(r'^clutch/', include('clutch.urls', namespace="clutch", app_name="clutch")),
 	url(r'^civil/', include('civil.urls')),
 	url(r'^credit/', include('credit.urls')),
 	url(r'^chronicle/', include('chronicle.urls')),

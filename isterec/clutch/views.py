@@ -8,9 +8,9 @@ from django.forms.formsets import formset_factory
 import re
 
  
-from clutch.forms import ClutchForm
+from clutch.forms import ClutchForm, ClutchFileForm 
 from clutch.forms import QuestionForm
-from clutch.models import ClutchRecData
+from clutch.models import ClutchRecData, File
 from clutch.models import Question, Answer
 
 @ensure_csrf_cookie
@@ -51,7 +51,7 @@ def questions_2(request):
                         if form.is_valid():
                                 info_post = request.session.get('_clutch_info_post')
                                 form_new = ClutchRecData(name=info_post['name'], rollno=info_post['rollno'], email=info_post['email'], mobileno=info_post['mobileno'])
-                                form_new.save()
+                                form_new.save() 
                                 info_page_1 = request.session.get('_clutch_Q_page_1')
                                 info_page_2 = request.POST
                                 i=0
@@ -71,19 +71,42 @@ def questions_2(request):
                                                 new_answer= Answer(answer=data, question=Question.objects.get(id=i), creator=form_new)
                                                 new_answer.save()
                                             
-                                request.session['_clutch_info_success'] = 'success'
-                                return HttpResponseRedirect('/clutch/success')
+                                
+                                request.session['_clutch_form_id'] = form_new.id
+                                return HttpResponseRedirect('/clutch/upload')
                 else:
                         form = QuestionForm(page = 2)
 
                 data = {'form': form}
                 return render_to_response('clutch/question.html', data, RequestContext(request))
 
+def upload(request):
+        if request.session.get('_clutch_info_success') is not None:
+                return HttpResponseRedirect('/clutch/success')
+        elif request.session.get('_clutch_form_id') is None:
+                return HttpResponseRedirect('/clutch/success')
+        else:
+                if request.method == 'POST':
+                        if request.FILES == None:
+                                raise Http404("No files uploaded")
+                        for newfile in request.FILES:
+                                addfile = File(file = request.FILES[newfile], creator=ClutchRecData.objects.get(id=request.session.get('_clutch_form_id')))
+                                addfile.save()
+                        request.session['_clutch_info_success'] = 'success'
+                        return HttpResponseRedirect('/')
+                else:
+                        form = ClutchFileForm()
+
+                data = {'form': form}
+                return render_to_response('clutch/upload.html', data, RequestContext(request))
+				
+				
 def success(request):       
         if request.session.get('_clutch_info_success') is None:
                 raise Http404("User session expired/Fill form first")
         else:
                 del request.session['_clutch_info_post']
                 del request.session['_clutch_Q_page_1']
+                del request.session['_clutch_form_id']
                 del request.session['_clutch_info_success']
                 return render(request, 'clutch/success.html')

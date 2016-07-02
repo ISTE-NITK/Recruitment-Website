@@ -5,6 +5,7 @@ from charge.models import Answer
 
 class AnswerInline(admin.StackedInline):
     model = Answer
+    extra = 0
 
     
 class ChargeRecDataAdmin(admin.ModelAdmin):
