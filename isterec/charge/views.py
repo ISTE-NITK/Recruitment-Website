@@ -43,7 +43,7 @@ def questions_1(request):
                 return render_to_response('charge/question.html', data, RequestContext(request))
 
 def questions_2(request):
-        if request.session.get('_charge_info_post') is None:
+        if request.session.get('_charge_Q_page_1') is None:
                 return HttpResponseRedirect('/charge/success')
         else:
                 if request.method == 'POST':
@@ -58,7 +58,7 @@ def questions_2(request):
                 return render_to_response('charge/question.html', data, RequestContext(request))
 
 def questions_3(request):
-        if request.session.get('_charge_info_post') is None:
+        if request.session.get('_charge_Q_page_2') is None:
                 return HttpResponseRedirect('/charge/success')
         else:
                 if request.method == 'POST':

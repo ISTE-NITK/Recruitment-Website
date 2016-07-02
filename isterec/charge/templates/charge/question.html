@@ -25,7 +25,7 @@
     {% for field in form.visible_fields %}
 		{% if field.field.page == 2 and field.auto_id == 'id_extra_field_4' %} <h3>Answer <strong>{% if form.errors %}<font color = "red">{% endif %}any two{% if form.errors %}</font>{% endif %}</strong> of the following questions you think you can <strong>{% if form.errors %}<font color = "red">{% endif %}answer the best{% if form.errors %}</font>{% endif %}</strong> :</h3><br>{% endif %}
         <div class="control-group {{ field.html_name }} {% if field.errors %}error{% endif %}">
-            <strong>{{ field.label|linebreaks }}</strong>{% if field.field.required %} *{% endif %}
+            <strong>{{ field.label|safe|linebreaks }}</strong>{% if field.field.required %}<font color = "red"><h4> *</h4></font>{% endif %}
             <div class="controls">
                 {{ field }}
                 {% if field.errors %}<span class="help-inline" > <font color = "red">{{ field.errors.as_text }}</font></span>{% endif %}

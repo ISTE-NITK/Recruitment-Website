@@ -8,7 +8,7 @@
 <!-- IMPORTANT enctype attribute! -->
 
 <h1>Details</h1>
-		
+	<br>	
 		
         <form class="form-horizontal" action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
@@ -23,13 +23,19 @@
         </div>
     {% endif %}
     {% for field in form.visible_fields %}
+		{% if field.field.page == 1 and field.auto_id == 'id_extra_field_2' %} 
+		<br>
+			<img src="{% static 'clutch/images/q2_image.jpg' %}" class="responsive-img" alt="question 2 Image" style='max-height:220px;margin-left:1em;'>
+		<br><br>
+		{% endif %}
         <div class="control-group {{ field.html_name }} {% if field.errors %}error{% endif %}">
-            <label class="control-label">{{ field.label }}{% if field.field.required %} <font color = "red"> *</font>{% endif %}</label>
+            <strong>{{ field.label|safe|linebreaks }}</strong>{% if field.field.required %}<font color = "red"><h4> *</h4></font>{% endif %}
             <div class="controls">
                 {{ field }}
-                {% if field.errors %}<span class="help-inline"><font color = "red">{{ field.errors.as_text }}</font></span>{% endif %}
+                {% if field.errors %}<span class="help-inline" > <font color = "red">{{ field.errors.as_text }}</font></span>{% endif %}
             </div>
         </div>
+		<br><br>
     {% endfor %}
     {% for field in form.hidden_fields %}
         {{ field }}

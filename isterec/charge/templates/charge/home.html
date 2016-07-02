@@ -24,7 +24,7 @@
     {% endif %}
     {% for field in form.visible_fields %}
         <div class="control-group {{ field.html_name }} {% if field.errors %}error{% endif %}">
-            <label class="control-label">{{ field.label }}{% if field.field.required %} *{% endif %}</label>
+            <label class="control-label">{{ field.label }}{% if field.field.required %} <font color = "red"> *</font>{% endif %}</label>
             <div class="controls">
                 {{ field }}
                 {% if field.errors %}<span class="help-inline"><font color = "red">{{ field.errors.as_text }}</font></span>{% endif %}
