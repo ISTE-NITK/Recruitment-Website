@@ -25,3 +25,13 @@ class Answer(models.Model):
     question = models.ForeignKey(Question)
     creator = models.ForeignKey(ClutchRecData)
     is_correct = models.BooleanField(default = False)
+
+    def __str__ (self):
+        return self.answer
+
+class File(models.Model):
+    file = models.FileField(upload_to='files/clutch/%Y/%m/%d')
+    creator = models.ForeignKey(ClutchRecData)
+
+    def __unicode__(self):
+        return self.file.name

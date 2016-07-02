@@ -25,3 +25,7 @@ class Answer(models.Model):
     question = models.ForeignKey(Question)
     creator = models.ForeignKey(ChargeRecData)
     is_correct = models.BooleanField(default = False)
+
+    def __str__ (self):
+        return self.answer
+

@@ -3,7 +3,7 @@ from django.template.defaultfilters import mark_safe
 from django.forms.formsets import BaseFormSet
 
  
-from clutch.models import ClutchRecData
+from clutch.models import ClutchRecData, File
 from clutch.models import Question
 from clutch.models import Answer
  
@@ -31,4 +31,11 @@ class QuestionForm(forms.Form):
                         self.fields['extra_field_{index}'.format(index=p.id)] = forms.CharField(widget=forms.Textarea,required = True)
                         self.fields['extra_field_{index}'.format(index=p.id)].label = p.question
                         self.fields['extra_field_{index}'.format(index=p.id)].page = p.page
+						
+class ClutchFileForm(forms.ModelForm):
+	class Meta:
+		model = File
+		fields = ('file',)
+		fields_required = ('file',)
+
 

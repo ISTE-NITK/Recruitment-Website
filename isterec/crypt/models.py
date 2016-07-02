@@ -14,7 +14,7 @@ class CryptRecData(models.Model):
         return self.rollno
 		
 class File(models.Model):
-    file = models.FileField(upload_to='files/%Y/%m/%d')
+    file = models.FileField(upload_to='files/crypt/%Y/%m/%d')
     creator = models.ForeignKey(CryptRecData)
 
     def __unicode__(self):
