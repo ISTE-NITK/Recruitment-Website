@@ -25,7 +25,7 @@ def home(request):
                 form = ClutchForm()
 
         data = {'form': form}
-        return render_to_response('clutch/home.html', data, RequestContext(request))
+        return render(request, 'clutch/home.html', data)
 
 def questions_1(request):
         if request.session.get('_clutch_info_post') is None:
@@ -40,7 +40,7 @@ def questions_1(request):
                         form = QuestionForm( page = 1)
 
                 data = {'form': form}
-                return render_to_response('clutch/question.html', data, RequestContext(request))
+                return render(request, 'clutch/question.html', data)
 
 def questions_2(request):
         if request.session.get('_clutch_Q_page_1') is None:
@@ -78,7 +78,7 @@ def questions_2(request):
                         form = QuestionForm(page = 2)
 
                 data = {'form': form}
-                return render_to_response('clutch/question.html', data, RequestContext(request))
+                return render(request, 'clutch/question.html', data)
 
 def upload(request):
         if request.session.get('_clutch_info_success') is not None:
@@ -98,7 +98,7 @@ def upload(request):
                         form = ClutchFileForm()
 
                 data = {'form': form}
-                return render_to_response('clutch/upload.html', data, RequestContext(request))
+                return render(request, 'clutch/upload.html', data)
 				
 				
 def success(request):       

@@ -9,4 +9,4 @@ from django.contrib.auth import authenticate, login, logout
 
 @login_required(login_url='/admin/login/')
 def home(request):
-    return render_to_response('useradmin/home.html', context_instance=RequestContext(request))
+    return render(request, 'useradmin/home.html')

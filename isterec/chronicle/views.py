@@ -25,7 +25,7 @@ def home(request):
                 form = ChronicleForm()
 
         data = {'form': form}
-        return render_to_response('chronicle/home.html', data, RequestContext(request))
+        return render(request, 'chronicle/home.html', data)
 
 def questions_1(request):
         if request.session.get('_chronicle_info_post') is None:
@@ -53,7 +53,7 @@ def questions_1(request):
                         form = QuestionForm(page = 1)
 
                 data = {'form': form}
-                return render_to_response('chronicle/question.html', data, RequestContext(request))
+                return render(request, 'chronicle/question.html', data)
 
 def success(request):       
         if request.session.get('_chronicle_info_success') is None:

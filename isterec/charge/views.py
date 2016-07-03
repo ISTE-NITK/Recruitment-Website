@@ -25,7 +25,7 @@ def home(request):
                 form = ChargeForm()
 
         data = {'form': form}
-        return render_to_response('charge/home.html', data, RequestContext(request))
+        return render(request, 'charge/home.html', data)
 
 def questions_1(request):
         if request.session.get('_charge_info_post') is None:
@@ -40,7 +40,7 @@ def questions_1(request):
                         form = QuestionForm( page = 1)
 
                 data = {'form': form}
-                return render_to_response('charge/question.html', data, RequestContext(request))
+                return render(request, 'charge/question.html', data)
 
 def questions_2(request):
         if request.session.get('_charge_Q_page_1') is None:
@@ -55,7 +55,7 @@ def questions_2(request):
                         form = QuestionForm_2(page = 2)
 
                 data = {'form': form}
-                return render_to_response('charge/question.html', data, RequestContext(request))
+                return render(request,'charge/question.html', data)
 
 def questions_3(request):
         if request.session.get('_charge_Q_page_2') is None:
@@ -95,7 +95,7 @@ def questions_3(request):
                         form = QuestionForm(page = 3)
 
                 data = {'form': form}
-                return render_to_response('charge/question.html', data, RequestContext(request))
+                return render(request,'charge/question.html', data)
 
 def success(request):       
         if request.session.get('_charge_info_success') is None:

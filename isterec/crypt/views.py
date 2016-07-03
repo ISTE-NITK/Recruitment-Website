@@ -13,6 +13,10 @@ from crypt.models import File
 
 @ensure_csrf_cookie
 def home(request):
+        if request.session.get('_crypt_info_success') is not None:
+                del request.session['_crypt_info_success']
+        if request.session.get('_crypt_info_post') is not None:
+                del request.session['_crypt_info_post']
         if request.method == 'POST':
                 form = CryptForm(request.POST)
                 if form.is_valid():
@@ -23,7 +27,7 @@ def home(request):
                 form = CryptForm()
 
         data = {'form': form}
-        return render_to_response('crypt/home.html', data, RequestContext(request))
+        return render(request, 'crypt/home.html', data)
 
 def upload(request):
         if request.session.get('_crypt_info_success') is not None:
@@ -46,7 +50,7 @@ def upload(request):
                         form = CryptFileForm()
 
                 data = {'form': form}
-                return render_to_response('crypt/upload.html', data, RequestContext(request))
+                return render(request, 'crypt/upload.html', data)
 
 def success(request):
         
@@ -54,6 +58,5 @@ def success(request):
                 raise Http404("User session expired/Fill form first")
         else:
                 del request.session['_crypt_info_post']
-                del request.session['_crypt_info_post_check']
                 del request.session['_crypt_info_success']
                 return render(request, 'crypt/success.html')
