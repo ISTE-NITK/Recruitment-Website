@@ -29,13 +29,13 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-
+LOGIN_REDIRECT_URL = ('/admin/')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 SESSION_COOKIE_AGE = 3600
 INSTALLED_APPS = [
 	'webapp',
-    'blog',
+	'useradmin',
 	'crypt',
 	'charge',
 	'credit',

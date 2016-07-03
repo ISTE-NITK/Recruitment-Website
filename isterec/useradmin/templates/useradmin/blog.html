@@ -1,0 +1,7 @@
+{%extends "webapp/header.html" %}
+
+{% block content %}
+	{%for info in object_list %}
+		<h5>{{info.rollno}}<a href="/admin/{{info.id}}">{{info.name}}</a></h5>
+	{% endfor %}
+{% endblock %}

@@ -17,7 +17,8 @@ from django.conf.urls import url, include
 from django.contrib import admin
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+    url(r'^djangoadmin/', admin.site.urls),
+	url(r'^admin/', include('useradmin.urls', namespace="useradmin", app_name="useradmin")),
 	url(r'^', include('webapp.urls')),
 	url(r'^crypt/', include('crypt.urls', namespace="crypt", app_name="crypt")),
 	url(r'^charge/', include('charge.urls')),
