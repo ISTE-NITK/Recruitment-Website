@@ -40,7 +40,6 @@ INSTALLED_APPS = [
 	'charge',
 	'credit',
 	'chronicle',
-	'bootstrapform',
 	'civil',
 	'create',
 	'clutch',
