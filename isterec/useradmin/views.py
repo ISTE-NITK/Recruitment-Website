@@ -92,4 +92,4 @@ def detailreply(request, **kwargs):
     elif sig_name == 'clutch':
         found_entry = ClutchRecData.objects.get(id = query_id)
     
-    return render(request, 'useradmin/results.html', {'result': found_entry })
+    return render(request, 'useradmin/detail.html', {'result': found_entry, 'signame': sig_name })

@@ -1,0 +1,60 @@
+{%extends "useradmin/header.html" %}
+
+{% block content %}
+{% load staticfiles %}
+<link href="{% static 'useradmin/css/style.css' %}" rel="stylesheet" type="text/css" />
+<div id="search-result-body">
+	<table>
+		<tr class="even">
+			<td><strong>Name:</strong> <br/></td>
+			<td>{{ result.name }} <br/></td>
+		</tr>
+		<tr class="even">
+			<td><strong>Roll No:</strong> <br/></td>
+			<td>{{ result.rollno }} <br/></td>
+		</tr>
+		<tr class="even">
+			<td><strong>Mobile No:</strong> <br/></td>
+			<td>{{ result.mobileno }} <br/></td>
+		</tr>
+		<tr class="even">
+			<td><strong>E-mail:</strong> <br/></td>
+			<td>{{ result.email }} <br/></td>
+		</tr>
+		{% if signame == 'crypt' %}
+		<tr class="odd">
+			<td><strong>Why do you want to join crypt?</strong> <br/></td>
+			<td>{{ result.body }} <br/></td>
+		</tr>
+		{% endif %}
+		{% if signame == 'create' %}
+		<tr class="odd">
+			<td><strong>URL to Poster or Video</strong> <br/></td>
+			<td><a href="{{result.URL_to_Poster_or_Video}}">{{ result.URL_to_Poster_or_Video }} <br/></td>
+		</tr>
+		{% endif %}
+		{% if signame != 'crypt' %}
+		<tr class="odd">
+			<td><strong>Question</strong> <br/></td>
+			<td><strong><font color = "green">Answer</font></strong><br/></td>
+		</tr>
+		{% for answer in result.answer_set.all %}
+		<tr class="odd">
+			<td><strong>{{ answer.question.question }}</strong> <br/></td>
+			<td><font color = "green">{{ answer.answer }}</font><br/></td>
+		</tr>
+		{% endfor %}
+		{% endif %}
+		{% if signame == 'crypt' or signame == 'clutch' %}
+		<tr class="odd">
+			<td><strong>Links(Resume):</strong> <br/></td>
+			<td>
+			{% for file in result.file_set.all %}
+			<a href="/{{file.file}}">{{ file.file }} <br/>
+			{% endfor %}
+			</td>
+		</tr>
+		{% endif %}
+	</table>
+</div>
+{% endblock %}
