@@ -1,0 +1,42 @@
+#search-result-body {
+font-size: 1.0em;
+font-family: “Lucida Grande”, Tahoma, Helvetica, sans-serif;
+color: #564b47;
+padding: 20px;
+margin: 0px;
+text-align: center;
+}
+ 
+#search-result-body div { padding: 0; margin: 0; }
+ 
+#search-result-body table { width: 100%; border: 1px solid #DDDDB2; border-spacing: 0; border-collapse: collapse; }
+ 
+#search-result-body tr { padding-bottom: 5px; border-bottom: 1px solid #CCC; }
+ 
+#search-result-body tr.odd { background: #FFF; }
+ 
+#search-result-body tr.even { background: #FFFFD4; }
+ 
+#search-result-body td { margin: 0; padding: 5px 5px 5px 3px; vertical-align: top; }
+ 
+#search-result-body td.right { text-align: right; }
+ 
+#centered {
+text-align: left;
+vertical-align: middle;
+margin: 0px auto;
+padding: 20px;
+width: 550px;
+background-color: #FFF;
+border: 1px solid #CCC;
+}
+ 
+#search-result-body div.padded { padding-top: 10px; }
+ 
+#search-result-body div.margin { margin-top: 20px; }
+ 
+#search-result-body div.clear { clear: both; }
+ 
+#search-result-body div.note { padding: 15px; background: #FFFFD4; border: 1px solid #DDDDB2; }
+ 
+#search-result-body .hint { font-size: 0.8em; color: #888; }

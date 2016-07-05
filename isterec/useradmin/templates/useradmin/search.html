@@ -1,0 +1,25 @@
+{%extends "useradmin/header.html" %}
+
+{% block content %}
+	
+<form id="searchform" action="results" method="get" accept-charset="utf-8">
+	  <div class="container">
+	<div class="row">
+		<h2>Search {{ signame }} Records</h2>
+		<div id="custom-search-input">
+			<div class="input-group col-md-8">
+				<input id="searchbox" name="q" type="text" class="  search-query form-control" placeholder="Rollno/Name/Mobile/E-mail" />
+				<span class="input-group-btn">
+				<button class="btn btn-danger" type="button">
+                                        <span class=" glyphicon glyphicon-search"></span>
+                                    </button>
+				</span>
+			</div>
+		</div>
+	</div>
+</div>
+
+    </form>
+
+	
+{% endblock %}
