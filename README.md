@@ -1,6 +1,6 @@
 # ISTE NITK Recruitment Website
 
-Production version : http://isterec.herokuapp.com/
+Production version : https://isterec.herokuapp.com/
 
 Local Installation : 
   - Activate a virtual environment
