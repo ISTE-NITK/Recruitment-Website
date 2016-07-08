@@ -3,6 +3,7 @@
 {% block content %}
 {% load static from staticfiles %}
 <link href="{% static 'useradmin/css/style.css' %}" rel="stylesheet" type="text/css" />
+<font color = "blue">{{ saveconf }}</font>
 <div id="search-result-body">
 	<table>
 		<tr class="even">
@@ -47,6 +48,30 @@
 			</td>
 		</tr>
 		{% endif %}
+	<form class="form-horizontal" action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.media }}
+    {% if form.errors %}
+        <div class="alert alert-error">
+            <ul>
+                {% for error in form.non_field_errors %}
+                    <li><font color = "red">{{ error }}</font></li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+    {% for field in form.visible_fields %}   
+		<tr class="even">
+			<td><strong><font color = "blue">{{ field.label }}</font></strong><br/></td>
+			<td><font color = "blue">{{ field }}</font><br/></td>
+		</tr>
+    {% endfor %}
+    <br> 
+	<tr>
+		<td colspan="2" class="left"><input class="btn btn-primary btn-large" type="submit" value="Save"/></td>
+	</tr>
+	</form>
 	</table>
+	
 </div>
 {% endblock %}

@@ -1,0 +1,38 @@
+{%extends "useradmin/header.html" %}
+
+{% block content %}
+{% load static from staticfiles %}
+<link href="{% static 'useradmin/css/style.css' %}" rel="stylesheet" type="text/css" />
+<div id="search-result-body">
+	{% if results|length %}
+
+	<table>
+		<tr class='even'>
+			<td colspan="5" class="left">
+			<strong>Found {{ results|length }} records</strong>
+			</td>
+		</tr>
+		 <tr class="{% cycle 'odd' 'even' %}">
+			<td><strong>Sr No.</strong></td>
+			<td><strong><a href="?sort=rollno">Roll No</a></strong><br/></td>
+			<td><strong><a href="?sort=name">Name</a></strong><br/></td>
+			<td><strong>Mobile </strong><br/></td>
+			<td><strong>E-mail</strong><br/></td>
+		</tr>
+		{% for user in results %}
+		<tr class="{% cycle 'odd' 'even' %}">
+			<td><strong>{{ forloop.counter }}.</strong></td>
+			<td><a href="/admin/{{ signame }}/results/detail/{{user.id}}">{{ user.rollno }}</a><br/></td>
+			<td>{{ user.name }} <br/></td>
+			<td>{{ user.mobileno }}<br/></td>
+			<td>{{ user.email }} <br/></td>
+		</tr>
+		{% endfor %}
+	</table>
+	{% else %}
+		<div class="note">
+	Your search yielded no results
+	</div>
+	{% endif %}
+</div>
+{% endblock %}

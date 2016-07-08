@@ -13,6 +13,13 @@ from clutch.models import ClutchRecData
 from django.db.models import Q
 import re
 
+from useradmin.forms import CryptScoreForm
+from useradmin.forms import ChargeScoreForm
+from useradmin.forms import ClutchScoreForm
+from useradmin.forms import CreditScoreForm
+from useradmin.forms import ChronicleScoreForm
+from useradmin.forms import CreateScoreForm
+
 @login_required(login_url='/admin/login/')
 def home(request):
     return render(request, 'useradmin/home.html')
@@ -49,47 +56,120 @@ def get_query(query_string, search_fields):
 @login_required(login_url='/admin/login/')
 def search(request, **kwargs):
     query_string = ''
+    query_sort = ''
+    sig_name = ''
     found_entries = None
     if ('q' in request.GET) and request.GET['q'].strip():
         query_string = request.GET['q']
+        query_sort = request.GET['sort']
         sig_name=kwargs.pop('sig_name')
         entry_query = get_query(query_string, ['rollno', 'name','mobileno','email',])
         
         if sig_name == 'crypt':
-            found_entries = CryptRecData.objects.filter(entry_query).order_by('name')
+            found_entries = CryptRecData.objects.filter(entry_query).order_by(query_sort)
         elif sig_name == 'charge':
-            found_entries = ChargeRecData.objects.filter(entry_query).order_by('name')
+            found_entries = ChargeRecData.objects.filter(entry_query).order_by(query_sort)
         elif sig_name == 'credit':
-            found_entries = CreditRecData.objects.filter(entry_query).order_by('name')
+            found_entries = CreditRecData.objects.filter(entry_query).order_by(query_sort)
         elif sig_name == 'chronicle':
-            found_entries = ChronicleRecData.objects.filter(entry_query).order_by('name')
+            found_entries = ChronicleRecData.objects.filter(entry_query).order_by(query_sort)
         elif sig_name == 'create':
-            found_entries = CreateRecData.objects.filter(entry_query).order_by('name')
+            found_entries = CreateRecData.objects.filter(entry_query).order_by(query_sort)
         elif sig_name == 'civil':
-            found_entries = CivilRecData.objects.filter(entry_query).order_by('name')
+            found_entries = CivilRecData.objects.filter(entry_query).order_by(query_sort)
         elif sig_name == 'clutch':
-            found_entries = ClutchRecData.objects.filter(entry_query).order_by('name')
+            found_entries = ClutchRecData.objects.filter(entry_query).order_by(query_sort)
             
-    return render(request, 'useradmin/results.html', { 'query_string': query_string, 'results': found_entries })
+    return render(request, 'useradmin/results.html', { 'query_string': query_string, 'results': found_entries, 'signame': sig_name })
+
+@login_required(login_url='/admin/login/')
+def selected(request, **kwargs):
+    found_entries = None
+    query_sort = ''
+    if ('sort' in request.GET):
+        sig_name=kwargs.pop('sig_name')
+        query_sort = request.GET['sort']
+        if sig_name == 'crypt':
+            found_entries = CryptRecData.objects.filter(is_selected=True).order_by(query_sort)
+        elif sig_name == 'charge':
+            found_entries = ChargeRecData.objects.filter(is_selected=True).order_by(query_sort)
+        elif sig_name == 'credit':
+            found_entries = CreditRecData.objects.filter(is_selected=True).order_by(query_sort)
+        elif sig_name == 'chronicle':
+            found_entries = ChronicleRecData.objects.filter(is_selected=True).order_by(query_sort)
+        elif sig_name == 'create':
+            found_entries = CreateRecData.objects.filter(is_selected=True).order_by(query_sort)
+        elif sig_name == 'civil':
+            found_entries = CivilRecData.objects.filter(is_selected=True).order_by(query_sort)
+        elif sig_name == 'clutch':
+            found_entries = ClutchRecData.objects.filter(is_selected=True).order_by(query_sort)
+            
+    return render(request, 'useradmin/selectedresults.html', { 'results': found_entries, 'signame': sig_name })
 
 @login_required(login_url='/admin/login/')						  
 def detailreply(request, **kwargs):
     sig_name = kwargs.pop('sig_name')
     query_id = kwargs.pop('pk')
     found_entry = None
+    confirmation = ''
+
     if sig_name == 'crypt':
         found_entry = CryptRecData.objects.get(id = query_id)
+        if request.method == 'POST':
+            form = CryptScoreForm(request.POST, instance=found_entry)
+            if(form.save()):
+                confirmation = 'Changes Saved'
+        else:
+            form = CryptScoreForm(instance=found_entry)
     elif sig_name == 'charge':
         found_entry = ChargeRecData.objects.get(id = query_id)
+        if request.method == 'POST':
+            form = ChargeScoreForm(request.POST, instance=found_entry)
+            if(form.save()):
+                confirmation = 'Changes Saved'
+        else:
+            form = ChargeScoreForm(instance=found_entry)
     elif sig_name == 'credit':
         found_entry = CreditRecData.objects.get(id = query_id)
+        if request.method == 'POST':
+            form = CreditScoreForm(request.POST, instance=found_entry)
+            if(form.save()):
+                confirmation = 'Changes Saved'
+        else:
+            form = CreditScoreForm(instance=found_entry)
     elif sig_name == 'chronicle':
         found_entry = ChronicleRecData.objects.get(id = query_id)
+        if request.method == 'POST':
+            form = ChronicleScoreForm(request.POST, instance=found_entry)
+            if(form.save()):
+                confirmation = 'Changes Saved'
+        else:
+            form = ChronicleScoreForm(instance=found_entry)
     elif sig_name == 'create':
         found_entry = CreateRecData.objects.get(id = query_id)
+        if request.method == 'POST':
+            form = CreateScoreForm(request.POST, instance=found_entry)
+            if(form.save()):
+                confirmation = 'Changes Saved'
+        else:
+            form = CreateScoreForm(instance=found_entry)
     elif sig_name == 'civil':
         found_entry = CivilRecData.objects.get(id = query_id)
+        if request.method == 'POST':
+            form = CivilScoreForm(request.POST, instance=found_entry)
+            if(form.save()):
+                confirmation = 'Changes Saved'
+        else:
+            form = CivilScoreForm(instance=found_entry)
     elif sig_name == 'clutch':
         found_entry = ClutchRecData.objects.get(id = query_id)
+        if request.method == 'POST':
+            form = ClutchScoreForm(request.POST, instance=found_entry)
+            if(form.save()):
+                confirmation = 'Changes Saved'
+        else:
+            form = ClutchScoreForm(instance=found_entry)
+
     
-    return render(request, 'useradmin/detail.html', {'result': found_entry, 'signame': sig_name })
+    data = {'form': form, 'result': found_entry, 'signame': sig_name, 'saveconf': confirmation }
+    return render(request, 'useradmin/detail.html', data)

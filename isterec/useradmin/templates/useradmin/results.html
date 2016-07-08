@@ -14,15 +14,15 @@
 		</tr>
 		 <tr class="{% cycle 'odd' 'even' %}">
 			<td><strong>Sr No.</strong></td>
-			<td><strong>Roll No</strong><br/></td>
-			<td><strong>Name</strong><br/></td>
+			<td><strong><a href="?q={{ query_string }}&sort=rollno">Roll No</a></strong><br/></td>
+			<td><strong><a href="?q={{ query_string }}&sort=name">Name</a></strong><br/></td>
 			<td><strong>Mobile </strong><br/></td>
 			<td><strong>E-mail</strong><br/></td>
 		</tr>
 		{% for user in results %}
 		<tr class="{% cycle 'odd' 'even' %}">
 			<td><strong>{{ forloop.counter }}.</strong></td>
-			<td><a href="detail/{{user.id}}">{{ user.rollno }}<br/></td>
+			<td><a href="/admin/{{ signame }}/results/detail/{{user.id}}">{{ user.rollno }}</a><br/></td>
 			<td>{{ user.name }} <br/></td>
 			<td>{{ user.mobileno }}<br/></td>
 			<td>{{ user.email }} <br/></td>
