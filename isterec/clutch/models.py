@@ -1,5 +1,5 @@
 from django.db import models
-
+import os
 
 
 	
@@ -35,3 +35,6 @@ class File(models.Model):
 
     def __unicode__(self):
         return self.file.name
+
+    def filename(self):
+        return os.path.basename(self.file.name)

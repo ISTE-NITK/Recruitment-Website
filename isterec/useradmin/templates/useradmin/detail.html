@@ -1,7 +1,7 @@
 {%extends "useradmin/header.html" %}
 
 {% block content %}
-{% load staticfiles %}
+{% load static from staticfiles %}
 <link href="{% static 'useradmin/css/style.css' %}" rel="stylesheet" type="text/css" />
 <div id="search-result-body">
 	<table>
@@ -21,19 +21,12 @@
 			<td><strong>E-mail:</strong> <br/></td>
 			<td>{{ result.email }} <br/></td>
 		</tr>
-		{% if signame == 'crypt' %}
-		<tr class="odd">
-			<td><strong>Why do you want to join crypt?</strong> <br/></td>
-			<td>{{ result.body }} <br/></td>
-		</tr>
-		{% endif %}
 		{% if signame == 'create' %}
 		<tr class="odd">
 			<td><strong>URL to Poster or Video</strong> <br/></td>
 			<td><a href="{{result.URL_to_Poster_or_Video}}">{{ result.URL_to_Poster_or_Video }} <br/></td>
 		</tr>
 		{% endif %}
-		{% if signame != 'crypt' %}
 		<tr class="odd">
 			<td><strong>Question</strong> <br/></td>
 			<td><strong><font color = "green">Answer</font></strong><br/></td>
@@ -44,13 +37,12 @@
 			<td><font color = "green">{{ answer.answer }}</font><br/></td>
 		</tr>
 		{% endfor %}
-		{% endif %}
 		{% if signame == 'crypt' or signame == 'clutch' %}
 		<tr class="odd">
 			<td><strong>Links(Resume):</strong> <br/></td>
 			<td>
 			{% for file in result.file_set.all %}
-			<a href="/{{file.file}}">{{ file.file }} <br/>
+			<a href="{{ MEDIA_URL }}{{ file.file }}">{{ file.filename }} <br/>
 			{% endfor %}
 			</td>
 		</tr>

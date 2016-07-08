@@ -4,7 +4,6 @@ from django.template import RequestContext
 from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response
 from django.views.decorators.csrf import ensure_csrf_cookie
-from django.forms.formsets import formset_factory
 import re
 
  

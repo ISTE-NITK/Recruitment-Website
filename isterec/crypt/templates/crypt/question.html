@@ -4,11 +4,8 @@
 
 {% load static from staticfiles %}
 
-<script>
-$('a[href="' + this.location.pathname + '"]').parents('li,ul').addClass('active');
-</script>
-<!-- IMPORTANT enctype attribute! -->
 
+<!-- IMPORTANT enctype attribute! -->
 <h1>Details</h1>
 		
 		
@@ -26,12 +23,13 @@ $('a[href="' + this.location.pathname + '"]').parents('li,ul').addClass('active'
     {% endif %}
     {% for field in form.visible_fields %}
         <div class="control-group {{ field.html_name }} {% if field.errors %}error{% endif %}">
-            <label class="control-label">{{ field.label }}{% if field.field.required %} <font color = "red"> *</font>{% endif %}</label>
+            <strong>{{ field.label|safe|linebreaks }}</strong>{% if field.field.required %}<font color = "red"><h4> *</h4></font>{% endif %}
             <div class="controls">
                 {{ field }}
-                {% if field.errors %}<span class="help-inline"><font color = "red">{{ field.errors.as_text }}</font></span>{% endif %}
+                {% if field.errors %}<span class="help-inline" > <font color = "red">{{ field.errors.as_text }}</font></span>{% endif %}
             </div>
         </div>
+		<br><br>
     {% endfor %}
     {% for field in form.hidden_fields %}
         {{ field }}
@@ -42,7 +40,7 @@ $('a[href="' + this.location.pathname + '"]').parents('li,ul').addClass('active'
             {% include "inline_formset.html" with formset=formset %}
         {% endfor %}        
     {% endblock formsets %}
-	<br>
+
     <div class="form-actions">
         <input class="btn btn-primary btn-large" type="submit" value="Submit"/>
         {% block extra_buttons %}

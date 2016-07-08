@@ -9,7 +9,7 @@
 
 <h1>Details</h1>
 
-<h2>Upload your resume</h2>
+<h2>Upload your resume(Optional)</h2>
 
 		
 		<form class="dropzone" id="my-awesome-dropzone" name="dropzone" action="{% url "crypt:upload" %}" method="post" enctype="multipart/form-data">
@@ -35,6 +35,9 @@
 		<button class="btn btn-primary btn-large" id="submit" type="button"  onclick="document.dropzone.submit()">
             Submit
         </button>
+		<button class="btn btn-primary btn-large" id="skip" type="button"  onclick="document.dropzone.submit()">
+            Skip
+        </button>
 
 		<script src="{% static 'crypt/js/dropzone.js' %}"></script>
         <script>
@@ -54,8 +57,10 @@
                    var myDropzone = this;
  
 					var uploadButton = document.querySelector("#upload");
+					var skipButton = document.querySelector("#skip");
 					var submitButton = document.querySelector("#submit");
 					submitButton.disabled = true;
+					uploadButton.disabled = true;
                     myDropzone = this; // closure
 
                 uploadButton.addEventListener("click", function() {
@@ -64,13 +69,25 @@
                 });
 				
 				var totalFiles = 0;
+		this.on("removedfile", function(file) {
+			if (this.getQueuedFiles().length == 0 ) {
+					skipButton.disabled = false;
+					uploadButton.disabled = true;
+			}
+		});
 			
-        
+        this.on("addedfile", function(file) {
+			if (this.getAcceptedFiles().length === totalFiles) {	
+				  uploadButton.disabled = false;
+				  skipButton.disabled = true;
+				}
+			});
 		this.on("success", function(file) {
 			totalFiles += 1;
 			if (this.getAcceptedFiles().length === totalFiles) {	
 				  submitButton.disabled = false;
 				  uploadButton.disabled = true;
+				  skipButton.disabled = true;
 				}
 			});
 		

@@ -5,6 +5,9 @@
 {% load static from staticfiles %}
 
 
+<script>
+$('a[href="' + this.location.pathname + '"]').parents('li,ul').addClass('active');
+</script>
 <!-- IMPORTANT enctype attribute! -->
 
 <h1>Details</h1>		
