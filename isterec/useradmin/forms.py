@@ -6,6 +6,7 @@ from clutch.models import ClutchRecData
 from credit.models import CreditRecData
 from chronicle.models import ChronicleRecData
 from create.models import CreateRecData
+from civil.models import CivilRecData
  
 
 class CryptScoreForm(forms.ModelForm):
@@ -60,5 +61,14 @@ class ChronicleScoreForm(forms.ModelForm):
 
 	def __init__(self, *args, **kwargs):
                 super(ChronicleScoreForm, self).__init__(*args, **kwargs)
+                self.fields['is_selected'].label = "Selected for next round?"
+
+class CivilScoreForm(forms.ModelForm):
+	class Meta:
+		model = CivilRecData
+		fields = ('score','is_selected',)
+
+	def __init__(self, *args, **kwargs):
+                super(CivilScoreForm, self).__init__(*args, **kwargs)
                 self.fields['is_selected'].label = "Selected for next round?"
 

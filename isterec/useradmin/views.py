@@ -10,6 +10,7 @@ from credit.models import CreditRecData
 from chronicle.models import ChronicleRecData
 from create.models import CreateRecData
 from clutch.models import ClutchRecData
+from civil.models import CivilRecData
 from django.db.models import Q
 import re
 
@@ -19,6 +20,7 @@ from useradmin.forms import ClutchScoreForm
 from useradmin.forms import CreditScoreForm
 from useradmin.forms import ChronicleScoreForm
 from useradmin.forms import CreateScoreForm
+from useradmin.forms import CivilScoreForm
 
 @login_required(login_url='/admin/login/')
 def home(request):
@@ -59,8 +61,10 @@ def search(request, **kwargs):
     query_sort = ''
     sig_name = ''
     found_entries = None
-    if ('q' in request.GET) and request.GET['q'].strip():
-        query_string = request.GET['q']
+    if ('q' in request.GET):
+        query_string = request.GET['q'].strip()
+        if query_string == '' :
+            query_string = '1'
         query_sort = request.GET['sort']
         sig_name=kwargs.pop('sig_name')
         entry_query = get_query(query_string, ['rollno', 'name','mobileno','email',])

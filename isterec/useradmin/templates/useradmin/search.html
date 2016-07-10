@@ -1,7 +1,9 @@
 {%extends "useradmin/header.html" %}
 
 {% block content %}
-	
+<script>
+$('a[href="' + this.location.pathname + '"]').parents('li,ul').addClass('active');
+</script>
 <form id="searchform" action="results" method="get" accept-charset="utf-8">
 	  <div class="container">
 	<div class="row">
@@ -17,7 +19,7 @@
 	</div>
 </div>
 <br>
-<button class="btn btn-danger" name="sort" value="-score" type="submit">Sort by Score</button>
+<button class="btn btn-danger" name="sort" value="-score" type="submit">Order by Score</button>
 <a href="selected/?sort=name" class="btn btn-danger">Show Selected</a>
     </form>
 

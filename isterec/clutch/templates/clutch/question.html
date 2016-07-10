@@ -7,10 +7,10 @@
 
 <!-- IMPORTANT enctype attribute! -->
 
-<h1>Details</h1>
 	<br>	
 		
-        <form class="form-horizontal" action="" method="POST" enctype="multipart/form-data">
+<form action="" method="POST" enctype="multipart/form-data">
+<legend><h1>Questions</h1></legend>
     {% csrf_token %}
     {{ form.media }}
     {% if form.errors %}
@@ -22,21 +22,38 @@
             </ul>
         </div>
     {% endif %}
+	<style type="text/css">
+		h4 {
+    display: inline;
+	}
+	</style>
     {% for field in form.visible_fields %}
 		{% if field.field.page == 1 and field.auto_id == 'id_extra_field_2' %} 
 		<br>
-			<img src="{% static 'clutch/images/q2_image.jpg' %}" class="responsive-img" alt="question 2 Image" style='max-height:220px;margin-left:1em;'>
+			<img src="{% static 'clutch/images/q2_image.jpg' %}" class="img-rounded responsive-img" alt="question 2 Image" style='max-height:220px;margin-left:1em;'>
 		<br><br>
 		{% endif %}
-        <div class="control-group {{ field.html_name }} {% if field.errors %}error{% endif %}">
-            <strong>{{ field.label|safe|linebreaks }}</strong>{% if field.field.required %}<font color = "red"><h4> *</h4></font>{% endif %}
-            <div class="controls">
-                {{ field }}
-                {% if field.errors %}<span class="help-inline" > <font color = "red">{{ field.errors.as_text }}</font></span>{% endif %}
-            </div>
+        <div class="form-group {{ field.html_name }}{% if field.errors %} has-error has-feedback{% endif %}">
+            <strong>{{ field.label|safe|linebreaksbr }}</strong>{% if field.field.required %}<font color = "red"><h4> *</h4></font>{% endif %}
+            <div class="row">
+			<div class="col-sm-8">
+			<br>
+			{{ field }}
+			{% if field.errors %}
+			<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+			<span class="help-block">{{ field.errors.as_text }}</span>
+			{% endif %}           
+			</div>
+			</div>
+			{% if field.field.page == 1 and field.auto_id == 'id_extra_field_1' %}
+				</li></ul>
+			{% endif %}
         </div>
 		<br><br>
     {% endfor %}
+	<script>
+		$('textarea').addClass('form-control');
+	</script>
     {% for field in form.hidden_fields %}
         {{ field }}
     {% endfor %}
@@ -48,7 +65,7 @@
     {% endblock formsets %}
 
     <div class="form-actions">
-        <input class="btn btn-primary btn-large" type="submit" value="Submit"/>
+        <input class="btn btn-primary" type="submit" value="Next >"/>
         {% block extra_buttons %}
         {% endblock extra_buttons %}
     </div>

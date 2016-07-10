@@ -34,7 +34,7 @@
 		</tr>
 		{% for answer in result.answer_set.all %}
 		<tr class="odd">
-			<td><strong>{{ answer.question.question }}</strong> <br/></td>
+			<td><strong>{{ answer.question.question|safe|linebreaks }}</strong> <br/></td>
 			<td><font color = "green">{{ answer.answer }}</font><br/></td>
 		</tr>
 		{% endfor %}
