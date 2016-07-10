@@ -121,7 +121,8 @@ def detailreply(request, **kwargs):
         found_entry = CryptRecData.objects.get(id = query_id)
         if request.method == 'POST':
             form = CryptScoreForm(request.POST, instance=found_entry)
-            if(form.save()):
+            if(form.is_valid()):
+                form.save()
                 confirmation = 'Changes Saved'
         else:
             form = CryptScoreForm(instance=found_entry)
@@ -129,7 +130,8 @@ def detailreply(request, **kwargs):
         found_entry = ChargeRecData.objects.get(id = query_id)
         if request.method == 'POST':
             form = ChargeScoreForm(request.POST, instance=found_entry)
-            if(form.save()):
+            if(form.is_valid()):
+                form.save()
                 confirmation = 'Changes Saved'
         else:
             form = ChargeScoreForm(instance=found_entry)
@@ -137,7 +139,8 @@ def detailreply(request, **kwargs):
         found_entry = CreditRecData.objects.get(id = query_id)
         if request.method == 'POST':
             form = CreditScoreForm(request.POST, instance=found_entry)
-            if(form.save()):
+            if(form.is_valid()):
+                form.save()
                 confirmation = 'Changes Saved'
         else:
             form = CreditScoreForm(instance=found_entry)
@@ -145,7 +148,8 @@ def detailreply(request, **kwargs):
         found_entry = ChronicleRecData.objects.get(id = query_id)
         if request.method == 'POST':
             form = ChronicleScoreForm(request.POST, instance=found_entry)
-            if(form.save()):
+            if(form.is_valid()):
+                form.save()
                 confirmation = 'Changes Saved'
         else:
             form = ChronicleScoreForm(instance=found_entry)
@@ -153,7 +157,8 @@ def detailreply(request, **kwargs):
         found_entry = CreateRecData.objects.get(id = query_id)
         if request.method == 'POST':
             form = CreateScoreForm(request.POST, instance=found_entry)
-            if(form.save()):
+            if(form.is_valid()):
+                form.save()
                 confirmation = 'Changes Saved'
         else:
             form = CreateScoreForm(instance=found_entry)
@@ -161,7 +166,8 @@ def detailreply(request, **kwargs):
         found_entry = CivilRecData.objects.get(id = query_id)
         if request.method == 'POST':
             form = CivilScoreForm(request.POST, instance=found_entry)
-            if(form.save()):
+            if(form.is_valid()):
+                form.save()
                 confirmation = 'Changes Saved'
         else:
             form = CivilScoreForm(instance=found_entry)
@@ -169,7 +175,8 @@ def detailreply(request, **kwargs):
         found_entry = ClutchRecData.objects.get(id = query_id)
         if request.method == 'POST':
             form = ClutchScoreForm(request.POST, instance=found_entry)
-            if(form.save()):
+            if(form.is_valid()):
+                form.save()
                 confirmation = 'Changes Saved'
         else:
             form = ClutchScoreForm(instance=found_entry)

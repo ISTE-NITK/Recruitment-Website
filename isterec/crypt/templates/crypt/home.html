@@ -9,7 +9,6 @@
 
 <script>
 $('a[href="' + this.location.pathname + '"]').parents('li,ul').addClass('active');
-$('input').addClass('form-control');
 </script>
 	
 		
@@ -34,9 +33,6 @@ $('input').addClass('form-control');
 			{{ field }}
 			</div>
 			</div>
-			<script>
-				$('input').addClass('form-control');
-			</script>
 			{% if field.errors %}
 			<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
 			<span class="help-block">{{ field.errors.as_text }}</span>
@@ -46,7 +42,9 @@ $('input').addClass('form-control');
             
         </div>
     {% endfor %}
-	
+	<script>
+		$('input').addClass('form-control');
+	</script>
     {% for field in form.hidden_fields %}
         {{ field }}
     {% endfor %}
@@ -58,7 +56,7 @@ $('input').addClass('form-control');
     {% endblock formsets %}
 	<br>
     <div class="form-actions">
-        <input class="btn btn-primary" type="submit" value="Next >"/>
+        <input class="btn btn-primary" type="submit" value="Next &rarr;"/>
         {% block extra_buttons %}
         {% endblock extra_buttons %}
     </div>

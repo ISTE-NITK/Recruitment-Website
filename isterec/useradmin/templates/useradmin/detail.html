@@ -2,52 +2,57 @@
 
 {% block content %}
 {% load static from staticfiles %}
-<link href="{% static 'useradmin/css/style.css' %}" rel="stylesheet" type="text/css" />
+
 <font color = "blue">{{ saveconf }}</font>
 <div id="search-result-body">
-	<table>
-		<tr class="even">
+	<table class="table table-hover" style="background-color:#FBF4AA">
+		<tr>
 			<td><strong>Name:</strong> <br/></td>
 			<td>{{ result.name }} <br/></td>
 		</tr>
-		<tr class="even">
+		<tr>
 			<td><strong>Roll No:</strong> <br/></td>
 			<td>{{ result.rollno }} <br/></td>
 		</tr>
-		<tr class="even">
+		<tr>
 			<td><strong>Mobile No:</strong> <br/></td>
 			<td>{{ result.mobileno }} <br/></td>
 		</tr>
-		<tr class="even">
+		<tr>
 			<td><strong>E-mail:</strong> <br/></td>
 			<td>{{ result.email }} <br/></td>
 		</tr>
 		{% if signame == 'create' %}
-		<tr class="odd">
+		<tr>
 			<td><strong>URL to Poster or Video</strong> <br/></td>
 			<td><a href="{{result.URL_to_Poster_or_Video}}">{{ result.URL_to_Poster_or_Video }} <br/></td>
 		</tr>
 		{% endif %}
-		<tr class="odd">
-			<td><strong>Question</strong> <br/></td>
-			<td><strong><font color = "green">Answer</font></strong><br/></td>
-		</tr>
-		{% for answer in result.answer_set.all %}
-		<tr class="odd">
-			<td><strong>{{ answer.question.question|safe|linebreaks }}</strong> <br/></td>
-			<td><font color = "green">{{ answer.answer }}</font><br/></td>
-		</tr>
-		{% endfor %}
-		{% if signame == 'crypt' or signame == 'clutch' %}
-		<tr class="odd">
-			<td><strong>Links(Resume):</strong> <br/></td>
-			<td>
-			{% for file in result.file_set.all %}
-			<a href="{{ MEDIA_URL }}{{ file.file }}">{{ file.filename }} <br/>
+		</table>
+		<div class="table-responsive">
+			<table class="table table-hover" style="background-color:#FBF4AA">
+			<tr>
+				<td><strong>Question</strong> <br/></td>
+				<td><strong><font color = "green">Answer</font></strong><br/></td>
+			</tr>
+			{% for answer in result.answer_set.all %}
+			<tr>
+				<td><strong>{{ answer.question.question|safe|linebreaks }}</strong> <br/></td>
+				<td><font color = "green">{{ answer.answer }}</font><br/></td>
+			</tr>
 			{% endfor %}
-			</td>
-		</tr>
-		{% endif %}
+			{% if signame == 'crypt' or signame == 'clutch' %}
+			<tr>
+				<td><strong>Links(Resume):</strong> <br/></td>
+				<td>
+				{% for file in result.file_set.all %}
+				<a href="{{ MEDIA_URL }}{{ file.file }}">{{ file.filename }} <br/>
+				{% endfor %}
+				</td>
+			</tr>
+			{% endif %}
+			</table>
+		</div>
 	<form class="form-horizontal" action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.media }}
@@ -60,18 +65,24 @@
             </ul>
         </div>
     {% endif %}
+	<table class="table table-hover">
     {% for field in form.visible_fields %}   
-		<tr class="even">
-			<td><strong><font color = "blue">{{ field.label }}</font></strong><br/></td>
-			<td><font color = "blue">{{ field }}</font><br/></td>
+		<tr>
+			<td><strong><font color = "blue">{{ field.label }}</font></strong></td>
+			<td><div class="col-sm-4"><center>{{ field }}</center></div>{% if field.errors %}<span class="help-block"><font color = "red">{{ field.errors.as_text }}</font></span>{% endif %}</td>
 		</tr>
     {% endfor %}
-    <br> 
-	<tr>
-		<td colspan="2" class="left"><input class="btn btn-primary btn-large" type="submit" value="Save"/></td>
-	</tr>
-	</form>
+	<script>
+		$('#id_score').addClass('form-control');
+		$('#id_score').attr('max', '10');
+	</script>
 	</table>
+    <br> 
+	<center>
+		<input class="btn btn-primary btn-large" type="submit" value="Save"/>
+	</center>
+	</form>
+
 	
 </div>
 {% endblock %}
