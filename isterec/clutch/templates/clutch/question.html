@@ -30,7 +30,7 @@
     {% for field in form.visible_fields %}
 		{% if field.field.page == 1 and field.auto_id == 'id_extra_field_2' %} 
 		<br>
-			<img src="{% static 'clutch/images/q2_image.jpg' %}" class="img-rounded responsive-img" alt="question 2 Image" style='max-height:220px;margin-left:1em;'>
+			<img src="{% static 'clutch/images/q2_image.jpg' %}" class="img-fluid img-rounded" alt="question 2 Image" style='max-width: 100%;height: auto;'>
 		<br><br>
 		{% endif %}
         <div class="form-group {{ field.html_name }}{% if field.errors %} has-error has-feedback{% endif %}">

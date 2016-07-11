@@ -3,7 +3,7 @@
 {% block content %}
 {% load static from staticfiles %}
 
-<font color = "blue">{{ saveconf }}</font>
+<font color = "#fff"><strong>{{ saveconf }}</strong></font><br>
 <div id="search-result-body">
 	<table class="table table-hover" style="background-color:#FBF4AA">
 		<tr>
@@ -68,7 +68,7 @@
 	<table class="table table-hover">
     {% for field in form.visible_fields %}   
 		<tr>
-			<td><strong><font color = "blue">{{ field.label }}</font></strong></td>
+			<td><strong><font color = "#5DADE2">{{ field.label }}</font></strong></td>
 			<td><div class="col-sm-4"><center>{{ field }}</center></div>{% if field.errors %}<span class="help-block"><font color = "red">{{ field.errors.as_text }}</font></span>{% endif %}</td>
 		</tr>
     {% endfor %}

@@ -1,14 +1,21 @@
 html, body {
   height: 100%;
+  width: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  background: #34495E;
+  -webkit-overflow-scrolling: touch;
 }
 
 .navbar-toggle {
   float: left;
   margin-left: 15px;
+  background: #34495E;
 }
 
 .navmenu {
   z-index: 1;
+  background: #34495E;
 }
 
 .canvas {
@@ -17,25 +24,28 @@ html, body {
   z-index: 2;
   min-height: 100%;
   padding: 50px 0 0 0;
-  background: #fff;
+  background-color:#154360;
 }
 
 @media (min-width: 0) {
   .navbar-toggle {
     display: block; /* force showing the toggle */
+	background: #34495E;
   }
 }
 
 @media (min-width: 992px) {
   body {
     padding: 0;
+	background: #34495E;
   }
   .navbar {
     right: auto;
-    background: none;
+    background: #34495E;
     border: none;
   }
   .canvas {
     padding: 0;
+	background:#154360;
   }
 }

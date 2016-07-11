@@ -5,6 +5,8 @@
 	<title>ISTE Recruitments Admin Page</title>
 	<meta charset="utf-8" />
 	{% load static from staticfiles %}
+	<link rel="apple-touch-startup-image" href="{% static 'img/logo152.png' %}">
+	<meta name="apple-mobile-web-app-capable" content="yes">
 	<link rel="icon" type="image/ico" href="{% static 'img/logo.ico' %}" /> 
 	<link rel="shortcut icon" type="image/ico" href="{% static 'img/logo.ico' %}">
 	<link rel="apple-touch-icon" href="{% static 'img/logo152.png' %}">
@@ -15,53 +17,57 @@
 	<script src="{% static 'js/jasny-bootstrap.min.js' %}"></script>
 	<link href="{% static 'useradmin/css/navmenu-reveal.css' %}" rel="stylesheet">
 	<script src="{% static 'js/bootstrap.min.js' %}"></script>
-	
-	<meta name="viewport" content = "width=device-width, initial-scale=1.0">
+	<meta name="viewport" content = "width=device-width; initial-scale = 1.0; maximum-scale=1.0; user-scalable=no" />
+
 	{% block extra_js %}{% endblock %}
-	<style type="text/css">
-		html,
-		body {
-		  height:100%
-		}
-	</style>
 </head>
 
 <body class="body">
-	<div class="navmenu navmenu-default navmenu-fixed-left">
-		<a class="navmenu-brand" href="/">ISTE Recruitments</a>
+	<div class="navmenu navmenu-default navmenu-fixed-left  hidden-md hidden-lg">
+		<a class="navmenu-brand" href="/"><font color = "#E5E7E9">ISTE Recruitments</font></a>
 		<ul class="nav nav-pills nav-stacked">
-			<li><a href='/admin/'>Home</a></li>
-			<li><a href='/admin/crypt/'>Crypt</a></li>
-			<li><a href='/admin/charge/'>Charge</a></li>
-			<li><a href='/admin/clutch/'>Clutch</a></li>
-			<li><a href='/admin/credit/'>Credit</a></li>
-			<li><a href='/admin/chronicle/'>Chronicle</a></li>
-			<li><a href='/admin/create/'>Create</a></li>
-			<li><a href='/admin/civil/'>Civil</a></li>
+			<li><a href='/admin/'><font color = "#7FB3D5">Home</font></a></li>
+			<li><a href='/admin/crypt/'><font color = "#7FB3D5">Crypt</font></a></li>
+			<li><a href='/admin/charge/'><font color = "#7FB3D5">Charge</font></a></li>
+			<li><a href='/admin/clutch/'><font color = "#7FB3D5">Clutch</font></a></li>
+			<li><a href='/admin/credit/'><font color = "#7FB3D5">Credit</font></a></li>
+			<li><a href='/admin/chronicle/'><font color = "#7FB3D5">Chronicle</font></a></li>
+			<li><a href='/admin/create/'><font color = "#7FB3D5">Create</font></a></li>
+			<li><a href='/admin/civil/'><font color = "#7FB3D5">Civil</font></a></li>
 		</ul>
+		<div class="logout-mobile" style="position: relative; bottom: 10px;">
+			<br><br>
+			<a href='/admin/logout'><font color = "#E5E7E9"><strong><center>Logout</center></strong></font></a>
+		</div>
 	</div>
 	
-	<div class="canvas" style="background-color:#20D2E4">
-      <div class="navbar navbar-default navbar-fixed-top hidden-md hidden-lg">
+	<div class="canvas">
+      <div class="navbar navbar-default navbar-fixed-top hidden-md hidden-lg" style="background-color:#1B4F72">
         <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-recalc="false" data-target=".navmenu" data-canvas=".canvas">
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
       </div>
-	<div class="container-fluid" style="min-height:95%; ">
+	<div class="container-fluid">
 		<div class="row">
 			  <div class="col-md-3">
 				  <br>
 				  <center>
-					<img src="{% static 'img/logo.png' %}" class="responsive-img" style='max-height:150px;' alt="iste-logo">
+					<img src="{% static 'img/logoInv.png' %}" class="responsive-img" style='max-height:150px;' alt="iste-logo">
 				  </center>
 			  </div>
 			  <div class="col-md-6">
 				  <br>
 				  <center>
-				  <br><br><h1>ISTE Recruitments Admin Page</h1>
+				  <br><br><h1><font color = "#E5E7E9">ISTE Recruitments Admin Page</font></h1>
 				  </center>
+			  </div>
+			  <div class="col-md-3 hidden-xs hidden-sm">
+				  <br>
+				  <div class="logout-mobile"  style="float: right;">
+						<a href='/admin/logout'><font color = "#E5E7E9"><strong>Logout</strong></font></a>
+				  </div>
 			  </div>
 		</div><hr>
 
@@ -97,8 +103,8 @@
 	</div>
 	<footer>
 		<div class="container-fluid" style='margin-left:15px'>
-			<br><br><center><p><a href="http://iste.nitk.ac.in/" target="blank"><font color = "#61380B">Homepage</font></a> | <a href="https://istenitk.wordpress.com/" target="blank"><font color = "#61380B">Blog</font></a></p></center>
-			<h6 style="text-align:right;"><font color = "#61380B">Made by Shiv & Chirag</font></h6>
+			<br><br><center><p><a href="http://iste.nitk.ac.in/" target="blank"><font color = "#5DADE2">Homepage</font></a><font color = "#fff"> | </font><a href="https://istenitk.wordpress.com/" target="blank"><font color = "#5DADE2">Blog</font></a></p></center>
+			<h6 style="text-align:right;"><font color = "#5499C7">Made by Shiv & Chirag</font></h6>
 		</div>
 	</footer>	
 	</div>

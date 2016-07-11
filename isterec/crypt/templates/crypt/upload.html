@@ -28,14 +28,14 @@
 	
         </form>
 		
-        <button class="btn btn-primary btn-large" id="upload" type="button">
+        <button class="btn btn-primary" id="upload" type="button">
             Upload all files
         </button>
 		
-		<button class="btn btn-primary btn-large" id="submit" type="button"  onclick="document.dropzone.submit()">
+		<button class="btn btn-primary" id="submit" type="button"  onclick="document.dropzone.submit()">
             Submit
         </button>
-		<button class="btn btn-primary btn-large" id="skip" type="button"  onclick="document.dropzone.submit()">
+		<button class="btn btn-primary" id="skip" type="button"  onclick="document.dropzone.submit()">
             Skip
         </button>
 
@@ -44,12 +44,12 @@
             Dropzone.options.myAwesomeDropzone = {
  
                 // Prevents Dropzone from uploading dropped files immediately
-				  maxFiles: 10,
-				  maxFilesize: 100, //mb
+				  maxFiles: 5,
+				  maxFilesize: 10, //mb
 				  addRemoveLinks: true,
 				  autoProcessQueue: false,// used for stopping auto processing upload
 				  uploadMultiple: true,
-				  parallelUploads: 10,
+				  parallelUploads: 5,
  
 				
                 init : function() {
