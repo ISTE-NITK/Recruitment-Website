@@ -2,12 +2,14 @@ html {
   min-width: 270px;
   height: 100%;
   width: 100%;
+  overflow: auto;
   background: #34495E;
 }
 
 body {
   height: 100%;
   width: 100%;
+  padding: 50px 0 0 0;
   background: #34495E;
 }
 
@@ -16,25 +18,15 @@ body {
   margin-left: 15px;
   background: #34495E;
 }
-
 .navmenu {
-  z-index: 1;
   background: #34495E;
-}
-
-.canvas {
-  position: relative;
-  left: 0;
-  z-index: 2;
-  min-height: 100%;
-  padding: 50px 0 0 0;
-  background-color:#154360;
 }
 
 @media (min-width: 0) {
   .navbar-toggle {
     display: block; /* force showing the toggle */
 	background: #34495E;
+	
   }
 }
 
@@ -47,9 +39,5 @@ body {
     right: auto;
     background: #34495E;
     border: none;
-  }
-  .canvas {
-    padding: 0;
-	background:#154360;
   }
 }
