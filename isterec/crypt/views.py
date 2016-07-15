@@ -66,7 +66,7 @@ def upload(request):
                                 request.session['_crypt_info_success'] = 'success'
                                 return HttpResponseRedirect('/crypt/success')
                         for newfile in request.FILES:
-                                addfile = File(file = request.FILES[newfile], creator=CryptRecData.objects.get(id=request.session.get('_crypt_form_id')))
+                                addfile = File(creator=CryptRecData.objects.get(id=request.session.get('_crypt_form_id')),file = request.FILES[newfile])
                                 addfile.save()
                         request.session['_crypt_info_success'] = 'success'
                         return HttpResponseRedirect('/')

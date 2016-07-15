@@ -89,7 +89,7 @@ def upload(request):
                         if request.FILES == None:
                                 raise Http404("No files uploaded")
                         for newfile in request.FILES:
-                                addfile = File(file = request.FILES[newfile], creator=ClutchRecData.objects.get(id=request.session.get('_clutch_form_id')))
+                                addfile = File(creator=ClutchRecData.objects.get(id=request.session.get('_clutch_form_id')), file = request.FILES[newfile])
                                 addfile.save()
                         request.session['_clutch_info_success'] = 'success'
                         return HttpResponseRedirect('/')

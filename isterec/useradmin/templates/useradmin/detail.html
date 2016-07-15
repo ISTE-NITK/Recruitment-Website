@@ -38,7 +38,7 @@
 			{% for answer in result.answer_set.all %}
 			<tr>
 				<td><strong>{{ answer.question.question|safe|linebreaks }}</strong> <br/></td>
-				<td><font color = "green">{{ answer.answer }}</font><br/></td>
+				<td><font color = "green">{{ answer.answer|linebreaks }}</font><br/></td>
 			</tr>
 			{% endfor %}
 			{% if signame == 'crypt' or signame == 'clutch' %}

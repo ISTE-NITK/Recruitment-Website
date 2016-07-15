@@ -1,7 +1,7 @@
 from django.db import models
 from django.core.validators import RegexValidator, MinValueValidator, MaxValueValidator
 import os
-
+import string, random
 
 	
 class CryptRecData(models.Model):
@@ -34,10 +34,12 @@ class Answer(models.Model):
     def __str__ (self):
         return self.answer
 
+def content_file_name(instance, filename):
+    return '/'.join(['crypt', 'resume', instance.creator.rollno, ''.join(random.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits) for _ in range(10)), filename])
 		
 class File(models.Model):
-    file = models.FileField(upload_to='files/crypt/%Y/%m/%d')
     creator = models.ForeignKey(CryptRecData)
+    file = models.FileField(upload_to=content_file_name)
 
     def __unicode__(self):
         return self.file.name
