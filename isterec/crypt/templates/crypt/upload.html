@@ -44,12 +44,13 @@
             Dropzone.options.myAwesomeDropzone = {
  
                 // Prevents Dropzone from uploading dropped files immediately
-				  maxFiles: 2,
-				  maxFilesize: 1, //mb
+				  maxFiles: 4,
+				  maxFilesize: 2, //mb
 				  addRemoveLinks: true,
 				  autoProcessQueue: false,// used for stopping auto processing upload
 				  uploadMultiple: true,
-				  parallelUploads: 2,
+				  parallelUploads: 4,
+				  acceptedFiles: ".pdf,.docx,.doc,.rtf,.txt,.jpeg,.jpg,.png,.gif,.zip,.rar,.odt",
  
 				
                 init : function() {
