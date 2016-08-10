@@ -23,7 +23,7 @@ class ChargeForm(forms.ModelForm):
         self.fields['email'].label    = "Your E-mail"
         self.fields['rollno'].label   = "Your Roll No"
         self.fields['mobileno'].label = "Your Mobile No"
-        self.fields['captcha'].label = "Are you human?"
+        self.fields['captcha'].label = "Please prove you're not a robot"
 
 
 class QuestionForm(forms.Form):
