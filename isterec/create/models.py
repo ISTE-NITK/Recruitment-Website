@@ -1,6 +1,6 @@
 from django.db import models
 from django.core.validators import RegexValidator, MinValueValidator, MaxValueValidator
-
+from django.utils import timezone
 
 	
 class CreateRecData(models.Model):
@@ -13,6 +13,7 @@ class CreateRecData(models.Model):
     URL_to_Poster_or_Video = models.URLField(blank=False, null=False,default='')
     score = models.PositiveIntegerField(validators=[MinValueValidator(0),MaxValueValidator(10)],blank=False, null=False,default=0)
     is_selected = models.BooleanField(default = False)
+    date_created = models.DateTimeField(default=timezone.now)
     def __str__ (self):
         return self.rollno
 

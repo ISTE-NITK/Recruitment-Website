@@ -2,7 +2,7 @@ from django.db import models
 from django.core.validators import RegexValidator, MinValueValidator, MaxValueValidator
 import os
 import string, random
-
+from django.utils import timezone
 	
 class ClutchRecData(models.Model):
     name = models.CharField(max_length=50, blank=False, null=False,default='')
@@ -13,6 +13,7 @@ class ClutchRecData(models.Model):
     email = models.EmailField(blank=False, null=False,default='')
     score = models.PositiveIntegerField(validators=[MinValueValidator(0),MaxValueValidator(10)],blank=False, null=False,default=0)
     is_selected = models.BooleanField(default = False)
+    date_created = models.DateTimeField(default=timezone.now)
     
     def __str__ (self):
         return self.rollno
