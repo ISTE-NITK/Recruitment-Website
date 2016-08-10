@@ -22,6 +22,7 @@ class ChronicleForm(forms.ModelForm):
         self.fields['email'].label    = "Your E-mail"
         self.fields['rollno'].label   = "Your Roll No"
         self.fields['mobileno'].label = "Your Mobile No"
+        self.fields['captcha'].label = "Are you human?"
 
 
 class QuestionForm(forms.Form):
