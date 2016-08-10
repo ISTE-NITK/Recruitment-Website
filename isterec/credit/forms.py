@@ -1,6 +1,7 @@
 from django import forms
 from django.template.defaultfilters import mark_safe
 from django.forms.formsets import BaseFormSet
+from captcha.fields import ReCaptchaField
 
  
 from credit.models import CreditRecData
@@ -9,17 +10,18 @@ from credit.models import Answer
  
 
 class CreditForm(forms.ModelForm):
-	class Meta:
-		model = CreditRecData
-		fields = ('name','rollno','mobileno','email')
-		fields_required = ('name','rollno','mobileno','email')
+    captcha = ReCaptchaField(attrs={'theme' : 'clean'})
+    class Meta:
+        model = CreditRecData
+        fields = ('name','rollno','mobileno','email')
+        fields_required = ('name','rollno','mobileno','email')
 
-	def __init__(self, *args, **kwargs):
-                super(CreditForm, self).__init__(*args, **kwargs)
-                self.fields['name'].label     = "Your Name"
-                self.fields['email'].label    = "Your E-mail"
-                self.fields['rollno'].label   = "Your Roll No"
-                self.fields['mobileno'].label = "Your Mobile No"
+    def __init__(self, *args, **kwargs):
+        super(CreditForm, self).__init__(*args, **kwargs)
+        self.fields['name'].label     = "Your Name"
+        self.fields['email'].label    = "Your E-mail"
+        self.fields['rollno'].label   = "Your Roll No"
+        self.fields['mobileno'].label = "Your Mobile No"
 
 
 class QuestionForm(forms.Form):
