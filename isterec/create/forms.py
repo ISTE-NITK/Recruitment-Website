@@ -1,7 +1,8 @@
 from django import forms
 from django.template.defaultfilters import mark_safe
 from django.forms.formsets import BaseFormSet
-from captcha.fields import ReCaptchaField
+from snowpenguin.django.recaptcha2.fields import ReCaptchaField
+from snowpenguin.django.recaptcha2.widgets import ReCaptchaWidget
 
  
 from create.models import CreateRecData
@@ -10,7 +11,7 @@ from create.models import Answer
  
 
 class CreateForm(forms.ModelForm):
-    captcha = ReCaptchaField(attrs={'theme' : 'clean'})
+    captcha = ReCaptchaField(widget=ReCaptchaWidget())
     class Meta:
         model = CreateRecData
         fields = ('name','rollno','mobileno','email')

@@ -1,8 +1,8 @@
 from django import forms
 from django.template.defaultfilters import mark_safe
 from django.forms.formsets import BaseFormSet
-from captcha.fields import ReCaptchaField
-
+from snowpenguin.django.recaptcha2.fields import ReCaptchaField
+from snowpenguin.django.recaptcha2.widgets import ReCaptchaWidget
  
 from clutch.models import ClutchRecData, File
 from clutch.models import Question
@@ -10,7 +10,7 @@ from clutch.models import Answer
  
 
 class ClutchForm(forms.ModelForm):
-    captcha = ReCaptchaField(attrs={'theme' : 'clean'})
+    captcha = ReCaptchaField(widget=ReCaptchaWidget())
     class Meta:
         model = ClutchRecData
         fields = ('name','rollno','mobileno','email')

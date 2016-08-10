@@ -1,8 +1,8 @@
 from django import forms
 from django.template.defaultfilters import mark_safe
 from django.forms.formsets import BaseFormSet
-from captcha.fields import ReCaptchaField
-
+from snowpenguin.django.recaptcha2.fields import ReCaptchaField
+from snowpenguin.django.recaptcha2.widgets import ReCaptchaWidget
  
 from credit.models import CreditRecData
 from credit.models import Question
@@ -10,7 +10,7 @@ from credit.models import Answer
  
 
 class CreditForm(forms.ModelForm):
-    captcha = ReCaptchaField(attrs={'theme' : 'clean'})
+    captcha = ReCaptchaField(widget=ReCaptchaWidget())
     class Meta:
         model = CreditRecData
         fields = ('name','rollno','mobileno','email')

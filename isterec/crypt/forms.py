@@ -2,11 +2,12 @@ from django import forms
 
 from crypt.models import CryptRecData
 from crypt.models import File, Question, Answer
-from captcha.fields import ReCaptchaField
+from snowpenguin.django.recaptcha2.fields import ReCaptchaField
+from snowpenguin.django.recaptcha2.widgets import ReCaptchaWidget
 
 
 class CryptForm(forms.ModelForm):
-    captcha = ReCaptchaField(attrs={'theme' : 'clean'})
+    captcha = ReCaptchaField(widget=ReCaptchaWidget())
     class Meta:
         model = CryptRecData
         fields = ('name','rollno','mobileno','email')

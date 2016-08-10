@@ -1,7 +1,8 @@
 from django import forms
 from django.template.defaultfilters import mark_safe
 from django.forms.formsets import BaseFormSet
-from captcha.fields import ReCaptchaField
+from snowpenguin.django.recaptcha2.fields import ReCaptchaField
+from snowpenguin.django.recaptcha2.widgets import ReCaptchaWidget
 
  
 from charge.models import ChargeRecData
@@ -10,7 +11,7 @@ from charge.models import Answer
  
 
 class ChargeForm(forms.ModelForm):
-    captcha = ReCaptchaField(attrs={'theme' : 'clean'})
+    captcha = ReCaptchaField(widget=ReCaptchaWidget())
     class Meta:
     	model = ChargeRecData
     	fields = ('name','rollno','mobileno','email')
