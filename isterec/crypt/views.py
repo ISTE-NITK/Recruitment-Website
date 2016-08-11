@@ -4,6 +4,7 @@ from django.template import RequestContext
 from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response
 from django.views.decorators.csrf import ensure_csrf_cookie
+from django.core.mail import send_mail
 import re
 
  
@@ -81,6 +82,8 @@ def success(request):
         if request.session.get('_crypt_info_success') is None:
                 raise Http404("User session expired/Fill form first")
         else:
+                info_post = request.session.get('_crypt_info_post')
+                send_mail('ISTE NITK Recruitments','We have recieved your submission. If you feel this is an error then please report it.','shivshnkr420@gmail.com',[info_post['email']],fail_silently=False,)
                 del request.session['_crypt_info_post']
                 del request.session['_crypt_form_id']
                 del request.session['_crypt_info_success']
