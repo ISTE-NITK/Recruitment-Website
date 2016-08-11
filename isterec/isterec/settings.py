@@ -49,7 +49,7 @@ STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
 # Application definition
 LOGIN_REDIRECT_URL = ('/admin/')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-SESSION_COOKIE_AGE = 3600
+SESSION_COOKIE_AGE = 18000
 MEDIAFILES_LOCATION = 'media'
 MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
 DEFAULT_FILE_STORAGE = 'webapp.custom_storages.MediaStorage'
