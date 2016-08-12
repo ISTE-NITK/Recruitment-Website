@@ -4,6 +4,8 @@ from django.shortcuts import render_to_response,redirect
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
+from django.views.decorators.csrf import csrf_protect
 from crypt.models import CryptRecData
 from charge.models import ChargeRecData
 from credit.models import CreditRecData
@@ -21,6 +23,7 @@ from useradmin.forms import CreditScoreForm
 from useradmin.forms import ChronicleScoreForm
 from useradmin.forms import CreateScoreForm
 from useradmin.forms import CivilScoreForm
+from useradmin.forms import RegistrationForm
 
 @login_required(login_url='/admin/login/')
 def home(request):
@@ -184,3 +187,34 @@ def detailreply(request, **kwargs):
     
     data = {'form': form, 'result': found_entry, 'signame': sig_name, 'saveconf': confirmation }
     return render(request, 'useradmin/detail.html', data)
+
+@csrf_protect
+@login_required(login_url='/admin/login/')
+def register(request):
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            user = User.objects.create_user(
+            username=form.cleaned_data['username'],
+            password=form.cleaned_data['password1'],
+            email=form.cleaned_data['email'],
+            first_name=form.cleaned_data['firstname'],
+            last_name=form.cleaned_data['lastname'],
+            is_active=False,
+            )
+            return HttpResponseRedirect('success/')
+    else:
+        form = RegistrationForm()
+    variables = RequestContext(request, {
+    'form': form
+    })
+ 
+    return render_to_response(
+    'useradmin/register.html',
+    variables,
+    )
+ 
+def register_success(request):
+    return render_to_response(
+    'useradmin/success.html',
+    )

@@ -35,5 +35,7 @@ urlpatterns = [
 				url(r'^chronicle/results/detail/(?P<pk>\d+)$', useradmin_views.detailreply, kwargs={'sig_name': 'chronicle'}),
 				url(r'^create/results/detail/(?P<pk>\d+)$', useradmin_views.detailreply, kwargs={'sig_name': 'create'}),
 				url(r'^login/$', auth_views.login, name='login', kwargs={'template_name': 'useradmin/login.html'}),
+				url(r'^register/$', useradmin_views.register),
+				url(r'^register/success/$', useradmin_views.register_success),
 				url(r'^logout/$', auth_views.logout, name='logout',kwargs={'next_page': '/'}),
             ]
