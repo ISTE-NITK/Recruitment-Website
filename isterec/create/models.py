@@ -11,7 +11,7 @@ class CreateRecData(models.Model):
     mobileno = models.CharField(max_length=16, validators=[phone_regex], blank=False, null=False,default='+91')
     email = models.EmailField(blank=False, null=False,default='')
     URL_to_Poster_or_Video = models.URLField(blank=False, null=False,default='')
-    score = models.PositiveIntegerField(validators=[MinValueValidator(0),MaxValueValidator(10)],blank=False, null=False,default=0)
+    score = models.PositiveIntegerField(validators=[MinValueValidator(0),MaxValueValidator(20)],blank=False, null=False,default=0)
     is_selected = models.BooleanField(default = False)
     date_created = models.DateTimeField(default=timezone.now)
     def __str__ (self):
