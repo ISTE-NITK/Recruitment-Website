@@ -16,13 +16,13 @@ from civil.models import CivilRecData
 from django.db.models import Q
 import re
 
-from useradmin.forms import CryptScoreForm
-from useradmin.forms import ChargeScoreForm
-from useradmin.forms import ClutchScoreForm
-from useradmin.forms import CreditScoreForm
-from useradmin.forms import ChronicleScoreForm
-from useradmin.forms import CreateScoreForm
-from useradmin.forms import CivilScoreForm
+from useradmin.forms import CryptScoreForm, CryptReviewForm
+from useradmin.forms import ChargeScoreForm, ChargeReviewForm
+from useradmin.forms import ClutchScoreForm, ClutchReviewForm
+from useradmin.forms import CreditScoreForm, CreditReviewForm
+from useradmin.forms import ChronicleScoreForm, ChronicleReviewForm
+from useradmin.forms import CreateScoreForm, CreateReviewForm
+from useradmin.forms import CivilScoreForm, CivilReviewForm
 from useradmin.forms import RegistrationForm
 
 @login_required(login_url='/admin/login/')
@@ -122,74 +122,148 @@ def detailreply(request, **kwargs):
 
     if sig_name == 'crypt':
         found_entry = CryptRecData.objects.get(id = query_id)
-        if request.method == 'POST':
-            form = CryptScoreForm(request.POST, instance=found_entry)
-            if(form.is_valid()):
-                form.save()
-                confirmation = 'Changes Saved'
+        if found_entry.reviewer_1 == '':
+            if request.method == 'POST':
+                form = CryptReviewForm(request.POST, instance=found_entry)
+                if(form.is_valid()):
+                    form.save()
+                    confirmation = 'Changes Saved'
+            else:
+                form = CryptReviewForm(instance=found_entry)
         else:
-            form = CryptScoreForm(instance=found_entry)
+            if request.method == 'POST':
+                form = CryptScoreForm(request.POST, instance=found_entry)
+                if(form.is_valid()):
+                    form.save()
+                    confirmation = 'Changes Saved'
+            else:
+                form = CryptScoreForm(instance=found_entry)
+
+            
     elif sig_name == 'charge':
         found_entry = ChargeRecData.objects.get(id = query_id)
-        if request.method == 'POST':
-            form = ChargeScoreForm(request.POST, instance=found_entry)
-            if(form.is_valid()):
-                form.save()
-                confirmation = 'Changes Saved'
+        if found_entry.reviewer_1 == '':
+            if request.method == 'POST':
+                form = ChargeReviewForm(request.POST, instance=found_entry)
+                if(form.is_valid()):
+                    form.save()
+                    confirmation = 'Changes Saved'
+            else:
+                form = ChargeReviewForm(instance=found_entry)
         else:
-            form = ChargeScoreForm(instance=found_entry)
+            if request.method == 'POST':
+                form = ChargeScoreForm(request.POST, instance=found_entry)
+                if(form.is_valid()):
+                    form.save()
+                    confirmation = 'Changes Saved'
+            else:
+                form = ChargeScoreForm(instance=found_entry)
+
+                
     elif sig_name == 'credit':
         found_entry = CreditRecData.objects.get(id = query_id)
-        if request.method == 'POST':
-            form = CreditScoreForm(request.POST, instance=found_entry)
-            if(form.is_valid()):
-                form.save()
-                confirmation = 'Changes Saved'
+        if found_entry.reviewer_1 == '':
+            if request.method == 'POST':
+                form = CreditReviewForm(request.POST, instance=found_entry)
+                if(form.is_valid()):
+                    form.save()
+                    confirmation = 'Changes Saved'
+            else:
+                form = CreditReviewForm(instance=found_entry)
         else:
-            form = CreditScoreForm(instance=found_entry)
+            if request.method == 'POST':
+                form = CreditScoreForm(request.POST, instance=found_entry)
+                if(form.is_valid()):
+                    form.save()
+                    confirmation = 'Changes Saved'
+            else:
+                form = CreditScoreForm(instance=found_entry)
+
+            
     elif sig_name == 'chronicle':
         found_entry = ChronicleRecData.objects.get(id = query_id)
-        if request.method == 'POST':
-            form = ChronicleScoreForm(request.POST, instance=found_entry)
-            if(form.is_valid()):
-                form.save()
-                confirmation = 'Changes Saved'
+        if found_entry.reviewer_1 == '':
+            if request.method == 'POST':
+                form = ChronicleReviewForm(request.POST, instance=found_entry)
+                if(form.is_valid()):
+                    form.save()
+                    confirmation = 'Changes Saved'
+            else:
+                form = ChronicleReviewForm(instance=found_entry)
         else:
-            form = ChronicleScoreForm(instance=found_entry)
+            if request.method == 'POST':
+                form = ChronicleScoreForm(request.POST, instance=found_entry)
+                if(form.is_valid()):
+                    form.save()
+                    confirmation = 'Changes Saved'
+            else:
+                form = ChronicleScoreForm(instance=found_entry)
+
+            
     elif sig_name == 'create':
         found_entry = CreateRecData.objects.get(id = query_id)
-        if request.method == 'POST':
-            form = CreateScoreForm(request.POST, instance=found_entry)
-            if(form.is_valid()):
-                form.save()
-                confirmation = 'Changes Saved'
+        if found_entry.reviewer_1 == '':
+            if request.method == 'POST':
+                form = CreateReviewForm(request.POST, instance=found_entry)
+                if(form.is_valid()):
+                    form.save()
+                    confirmation = 'Changes Saved'
+            else:
+                form = CreateReviewForm(instance=found_entry)
         else:
-            form = CreateScoreForm(instance=found_entry)
+            if request.method == 'POST':
+                form = CreateScoreForm(request.POST, instance=found_entry)
+                if(form.is_valid()):
+                    form.save()
+                    confirmation = 'Changes Saved'
+            else:
+                form = CreateScoreForm(instance=found_entry)
+
+            
     elif sig_name == 'civil':
         found_entry = CivilRecData.objects.get(id = query_id)
-        if request.method == 'POST':
-            form = CivilScoreForm(request.POST, instance=found_entry)
-            if(form.is_valid()):
-                form.save()
-                confirmation = 'Changes Saved'
+        if found_entry.reviewer_1 == '':
+            if request.method == 'POST':
+                form = CivilReviewForm(request.POST, instance=found_entry)
+                if(form.is_valid()):
+                    form.save()
+                    confirmation = 'Changes Saved'
+            else:
+                form = CivilReviewForm(instance=found_entry)
         else:
-            form = CivilScoreForm(instance=found_entry)
+            if request.method == 'POST':
+                form = CivilScoreForm(request.POST, instance=found_entry)
+                if(form.is_valid()):
+                    form.save()
+                    confirmation = 'Changes Saved'
+            else:
+                form = CivilScoreForm(instance=found_entry)
+
+            
     elif sig_name == 'clutch':
         found_entry = ClutchRecData.objects.get(id = query_id)
-        if request.method == 'POST':
-            form = ClutchScoreForm(request.POST, instance=found_entry)
-            if(form.is_valid()):
-                form.save()
-                confirmation = 'Changes Saved'
+        if found_entry.reviewer_1 == '':
+            if request.method == 'POST':
+                form = ClutchReviewForm(request.POST, instance=found_entry)
+                if(form.is_valid()):
+                    form.save()
+                    confirmation = 'Changes Saved'
+            else:
+                form = ClutchReviewForm(instance=found_entry)
         else:
-            form = ClutchScoreForm(instance=found_entry)
+            if request.method == 'POST':
+                form = ClutchScoreForm(request.POST, instance=found_entry)
+                if(form.is_valid()):
+                    form.save()
+                    confirmation = 'Changes Saved'
+            else:
+                form = ClutchScoreForm(instance=found_entry)
 
     
     data = {'form': form, 'result': found_entry, 'signame': sig_name, 'saveconf': confirmation }
     return render(request, 'useradmin/detail.html', data)
 
 @csrf_protect
-@login_required(login_url='/admin/login/')
 def register(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)

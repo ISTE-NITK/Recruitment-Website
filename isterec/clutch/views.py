@@ -4,6 +4,7 @@ from django.template import RequestContext
 from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response
 from django.views.decorators.csrf import ensure_csrf_cookie
+from django.core.mail import send_mail
 import re
 
  
@@ -104,8 +105,8 @@ def success(request):
         if request.session.get('_clutch_info_success') is None:
                 raise Http404("User session expired/Fill form first")
         else:
-                info_post = request.session.get('_civil_info_post')
-                send_mail('ISTE NITK Recruitments 2016','Holla!\n\nThank You for filling up the recuitment form. We have recieved your submission. We look forward to meeting you in the interaction.\n\nIf you haven\'t applied then please report back to us.\n\nSee you soon! :)\n\nTeam ISTE-NITK','istenitkchapter@gmail.com',[info_post['email']],fail_silently=False,)
+                info_post = request.session.get('_clutch_info_post')
+                send_mail('ISTE NITK Recruitments 2016','Hello ' + info_post['name'] + '!\n\nThank You for filling up the recruitment form. We have received your submission. We look forward to meeting you in the interaction.\n\nIf you haven\'t applied then please report back to us.\n\nSee you soon! :)\n\nTeam ISTE-NITK','istenitkchapter@gmail.com',[info_post['email']],fail_silently=False,)
                 del request.session['_clutch_info_post']
                 del request.session['_clutch_Q_page_1']
                 del request.session['_clutch_form_id']

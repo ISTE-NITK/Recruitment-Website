@@ -83,8 +83,9 @@ def success(request):
                 raise Http404("User session expired/Fill form first")
         else:
                 info_post = request.session.get('_crypt_info_post')
-                send_mail('ISTE NITK Recruitments 2016','Holla!\n\nThank You for filling up the recuitment form. We have recieved your submission. We look forward to meeting you in the interaction.\n\nIf you haven\'t applied then please report back to us.\n\nSee you soon! :)\n\nTeam ISTE-NITK','istenitkchapter@gmail.com',[info_post['email']],fail_silently=False,)
+                send_mail('ISTE NITK Recruitments 2016','Hello ' + info_post['name'] + '!\n\nThank You for filling up the recruitment form. We have received your submission. We look forward to meeting you in the interaction.\n\nIf you haven\'t applied then please report back to us.\n\nSee you soon! :)\n\nTeam ISTE-NITK','istenitkchapter@gmail.com',[info_post['email']],fail_silently=False,)
                 del request.session['_crypt_info_post']
                 del request.session['_crypt_form_id']
                 del request.session['_crypt_info_success']
+                
                 return render(request, 'crypt/success.html')
