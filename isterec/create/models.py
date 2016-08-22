@@ -12,6 +12,10 @@ class CreateRecData(models.Model):
     email = models.EmailField(blank=False, null=False,default='')
     URL_to_Poster_or_Video = models.URLField(blank=False, null=False,default='')
     score = models.PositiveIntegerField(validators=[MinValueValidator(0),MaxValueValidator(20)],blank=False, null=False,default=0)
+    reviewer_1 = models.TextField(blank=False, null=False,default='')
+    reviewer_2 = models.TextField(blank=False, null=False,default='')
+    reviewer_3 = models.TextField(blank=False, null=False,default='')
+    day_to_slot = models.PositiveIntegerField(validators=[MinValueValidator(0),MaxValueValidator(5)],blank=False, null=False,default=0)
     is_selected = models.BooleanField(default = False)
     date_created = models.DateTimeField(default=timezone.now)
     def __str__ (self):
