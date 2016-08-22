@@ -4,33 +4,61 @@
 {% load static from staticfiles %}
 
 <font color = "#fff"><strong>{{ saveconf }}</strong></font><br>
+{% if form.errors %}
+        <div class="alert alert-error">
+            <ul>
+                {% for error in form.errors %}
+					{% if error == "reviewer_1" %}
+                    <li><font color = "red"><h2><strong>Panel member 1 not filled. Scroll down to see further errors.</strong></h2></font></li>
+					{% elif error == "reviewer_2" %}
+					<li><font color = "red"><h2><strong>Panel member 2 not filled. Scroll down to see further errors.</strong></h2></font></li>
+					{% elif error == "reviewer_3" %}
+					<li><font color = "red"><h2><strong>Panel HR member not filled. Scroll down to see further errors.</strong></h2></font></li>
+					{% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
 <div id="search-result-body">
 	<table class="table table-hover" style="background-color:#FBF4AA">
 		<tr>
-			<td><strong>Name:</strong> <br/></td>
-			<td>{{ result.name }} <br/></td>
+			<td style="vertical-align: middle;"><center><strong>Name:</strong></center> <br/></td>
+			<td style="vertical-align: middle;"><center>{{ result.name }} </center><br/></td>
 		</tr>
 		<tr>
-			<td><strong>Roll No:</strong> <br/></td>
-			<td>{{ result.rollno }} <br/></td>
+			<td style="vertical-align: middle;"><center><strong>Roll No:</strong></center> <br/></td>
+			<td style="vertical-align: middle;"><center>{{ result.rollno }} </center><br/></td>
 		</tr>
 		<tr>
-			<td><strong>Mobile No:</strong> <br/></td>
-			<td>{{ result.mobileno }} <br/></td>
+			<td style="vertical-align: middle;"><center><strong>Mobile No:</strong></center> <br/></td>
+			<td style="vertical-align: middle;"><center>{{ result.mobileno }} </center><br/></td>
 		</tr>
 		<tr>
-			<td><strong>E-mail:</strong> <br/></td>
-			<td>{{ result.email }} <br/></td>
+			<td style="vertical-align: middle;"><center><strong>E-mail:</strong> </center><br/></td>
+			<td style="vertical-align: middle;"><center>{{ result.email }} </center><br/></td>
 		</tr>
 		{% if signame == 'create' %}
 		<tr>
-			<td><strong>URL to Poster or Video</strong> <br/></td>
-			<td><a href="{{result.URL_to_Poster_or_Video}}">{{ result.URL_to_Poster_or_Video }} <br/></td>
+			<td style="vertical-align: middle;"><center><strong>URL to Poster or Video</strong></center> <br/></td>
+			<td style="vertical-align: middle;"><center><a href="{{result.URL_to_Poster_or_Video}}">{{ result.URL_to_Poster_or_Video }} </center><br/></td>
 		</tr>
 		{% endif %}
+		<tr style="background-color:#C5CCF5;">
+			<td style="vertical-align: middle;" colspan="2">
+				<center><h3>
+				<strong> 
+					{% if result.reviewer_1 == '' or result.reviewer_2 == '' or result.reviewer_3 == ''  %}
+					Not Yet Interviewed
+					{% else %}
+					Score: {{ result.score }}  
+					{% endif %}
+				</strong>
+				</h3></center><br/>
+			</td>
+		</tr>
 		</table>
 		<div class="table-responsive">
-			<table class="table table-hover" style="background-color:#FBF4AA">
+			<table class="table table-hover" style="background-color:#FBF4AA;">
 			<tr>
 				<td><strong>Question</strong> <br/></td>
 				<td><strong><font color = "green">Answer</font></strong><br/></td>
@@ -53,6 +81,10 @@
 			{% endif %}
 			</table>
 		</div>
+		{% if form.visible_fields.2.value == '' or form.visible_fields.3.value == '' or form.visible_fields.4.value == ''  %}
+		<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSd-j1aJSpxwpV9AHAwDjVn-OH48BBkwHeUDTRRnVM1ZkweCNg/viewform?embedded=true" width="100%" height="2000" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+		<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfj_Dy8-pH5XyGEQsyh0DOEHP1CVAAmh2RGk_Fn4F5_iXnEsQ/viewform?embedded=true" width="100%" height="2500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+		{% endif %}
 	<form class="form-horizontal" action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.media }}
@@ -65,18 +97,60 @@
             </ul>
         </div>
     {% endif %}
-	<table class="table table-hover">
+	{% if form.visible_fields.2.value == '' or form.visible_fields.3.value == '' or form.visible_fields.4.value == ''  %}
+	<ul class="table-responsive" style="background-color: #FCFCFC;">
+    {% for field in form.visible_fields %}   
+			<div class="form-group {{ field.html_name }}{% if field.errors %} has-error has-feedback{% elif form.is_bound %} has-success has-feedback{% endif %}">
+            <label class="control-label">{{ field.label }}{% if field.field.required %} <font color = "red"> *</font>{% endif %}</label>       
+			<div class="row">
+			<div class="col-sm-4">
+			{{ field }}
+			</div>
+			</div>
+			{% if field.errors %}
+			<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+			<span class="help-block">{{ field.errors.as_text }}</span>
+			{% elif form.is_bound %}
+			<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+			{% endif %}
+            
+        </div>
+    {% endfor %}
+	</ul>
+	{% else %}
+		<table class="table table-hover" style="background-color: #FCFCFC;">
+		<tr>
+			<td>
+			<strong>Technical Review 1:</strong> <br/>
+			{{ result.reviewer_1|safe|linebreaksbr }} <br/>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<strong>Technical Review 2:</strong> <br/>
+			{{ result.reviewer_2|safe|linebreaksbr }} <br/>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<strong>HR Review :</strong> <br/>
+			{{ result.reviewer_3|safe|linebreaksbr }} <br/>
+			</td>
+		</tr>
+		</table>
+		<table class="table table-hover">
     {% for field in form.visible_fields %}   
 		<tr>
 			<td><strong><font color = "#5DADE2">{{ field.label }}</font></strong></td>
 			<td><div class="col-sm-4"><center>{{ field }}</center></div>{% if field.errors %}<span class="help-block"><font color = "red">{{ field.errors.as_text }}</font></span>{% endif %}</td>
 		</tr>
     {% endfor %}
+	</table>
+	{% endif %}
 	<script>
 		$('#id_score').addClass('form-control');
 		$('#id_score').attr('max', '20');
 	</script>
-	</table>
     <br> 
 	<center>
 		<input class="btn btn-primary btn-large" type="submit" value="Save"/>

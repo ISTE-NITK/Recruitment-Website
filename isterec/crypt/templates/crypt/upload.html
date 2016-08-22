@@ -6,50 +6,18 @@
 
 
 <!-- IMPORTANT enctype attribute! -->
-
-<h1>Details</h1>
-
-<h2>Upload your resume(Optional)</h2>
-
-		
-		<form class="dropzone" id="my-awesome-dropzone" name="dropzone" action="{% url "crypt:upload" %}" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-			
-    {% if form.errors %}
-        <div class="alert alert-error">
-            <ul>
-                {% for error in form.non_field_errors %}
-                    <li><font color = "red">{{ error }}</font></li>
-                {% endfor %}
-            </ul>
-        </div>
-    {% endif %}
-	
-	
-        </form>
-		
-        <button class="btn btn-primary" id="upload" type="button">
-            Upload all files
-        </button>
-		
-		<button class="btn btn-primary" id="submit" type="button"  onclick="document.dropzone.submit()">
-            Submit
-        </button>
-		<button class="btn btn-primary" id="skip" type="button"  onclick="document.dropzone.submit()">
-            Skip
-        </button>
-
-		<script src="{% static 'crypt/js/dropzone.js' %}"></script>
+<script src="{% static 'crypt/js/dropzone.js' %}"></script>
         <script>
             Dropzone.options.myAwesomeDropzone = {
  
                 // Prevents Dropzone from uploading dropped files immediately
-				  maxFiles: 2,
-				  maxFilesize: 1, //mb
+				  maxFiles: 4,
+				  maxFilesize: 3, //mb
 				  addRemoveLinks: true,
 				  autoProcessQueue: false,// used for stopping auto processing upload
 				  uploadMultiple: true,
-				  parallelUploads: 2,
+				  parallelUploads: 4,
+				  acceptedFiles: ".pdf,.docx,.doc,.rtf,.txt,.jpeg,.jpg,.png,.gif,.zip,.rar,.odt",
  
 				
                 init : function() {
@@ -107,7 +75,40 @@
                 }
             };
         </script>
+<h1>Details</h1>
+
+<h2>Upload your resume(Optional)</h2>
+
+		
+		<form class="dropzone" id="my-awesome-dropzone" name="dropzone" action="{% url "crypt:upload" %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+			
+    {% if form.errors %}
+        <div class="alert alert-error">
+            <ul>
+                {% for error in form.non_field_errors %}
+                    <li><font color = "red">{{ error }}</font></li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+	<div class="fallback"> <!-- this is the fallback if JS isn't working -->
+        <input name="file" type="file" multiple />
+    </div>
 	
+        </form>
+
+		
+		<button class="btn btn-primary" id="upload" type="button">
+            Upload all files
+        </button>
+		
+		<button class="btn btn-primary" id="submit" type="button"  onclick="document.dropzone.submit()">
+            Submit
+        </button>
+		<button class="btn btn-primary" id="skip" type="button"  onclick="document.dropzone.submit()">
+            Skip
+        </button>
 	
 		
 {% endblock %}

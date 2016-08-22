@@ -27,7 +27,11 @@
 				<td>{{ user.name }} <br/></td>
 				<td>{{ user.mobileno }}<br/></td>
 				<td>{{ user.email }} <br/></td>
+				{% if user.reviewer_1 == '' or user.reviewer_2 == '' or user.reviewer_3 == ''  %}
+				<td>Not Yet Interviewed<br/></td>
+				{% else %}
 				<td>{{ user.score }} <br/></td>
+				{% endif %}
 			</tr>
 			{% endfor %}
 		</table>

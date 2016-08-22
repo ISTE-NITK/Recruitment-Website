@@ -12,7 +12,7 @@ $('a[href="' + this.location.pathname + '"]').parents('li,ul').addClass('active'
 	
 		
 <form action="" method="POST" enctype="multipart/form-data">
-	<legend><h1>User Registration</h1></legend>
+	<legend><h1>Admin Registration</h1></legend>
     {% csrf_token %}
     {{ form.media }}
     {% if form.errors %}
