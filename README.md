@@ -1,4 +1,4 @@
-# ISTE NITK Recruitment Website
+# BEST ISTE NITK Recruitment Website
 
 Production version : https://istenitk.tk/
 
