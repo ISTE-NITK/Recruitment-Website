@@ -1,7 +1,7 @@
 # ISTE NITK Recruitment Website
 
-Production version : https://istenitk.tk/
+Production Version :- https://istenitk.tk/
 
-Local Installation : 
-  - Activate a virtual environment
+Local Installation :- 
+  - Activate a Virtual Environment
   - Run `pip install -r requirements.txt`
