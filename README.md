@@ -1,4 +1,5 @@
 # ISTE NITK Recruitment Website
+# An amazing project
 
 Production version : https://istenitk.tk/
 
