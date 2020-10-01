@@ -1,4 +1,4 @@
-# ISTE NITK Recruitment Website
+# ISTE NITK is an amazing & semple Recruitment Website
 
 Production version : https://istenitk.tk/
 
