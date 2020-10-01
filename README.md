@@ -1,6 +1,6 @@
-# ISTE NITK Recruitment Website
+# Recruitment Website
 
-Production version : https://istenitk.tk/
+
 
 Local Installation : 
   - Activate a virtual environment
