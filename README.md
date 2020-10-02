@@ -2,6 +2,6 @@
 
 Production version : https://istenitk.tk/
 
-Local Installation : 
+For Local Installation : 
   - Activate a virtual environment
   - Run `pip install -r requirements.txt`
