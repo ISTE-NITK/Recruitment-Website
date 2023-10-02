@@ -1,8 +1,8 @@
 boto==2.41.0
 dj-database-url==0.4.1
-Django==1.9.7
-django-storages==1.4.1
-gunicorn==19.6.0
+Django==3.2.21
+django-storages==1.7
+gunicorn==19.10.0
 pystache==0.5.4
 psycopg2==2.6.1
 django-recaptcha==1.0.5
